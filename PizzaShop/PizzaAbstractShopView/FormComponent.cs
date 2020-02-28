@@ -13,15 +13,15 @@ using Unity;
 
 namespace PizzaAbstractShopView
 {
-    public partial class FormComponent : Form
+    public partial class FormNameIngridient : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IComponentLogic logic;
+        private readonly IIngridientLogic logic;
         private int? id;
 
-        public FormComponent(IComponentLogic logic)
+        public FormNameIngridient(IIngridientLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -32,10 +32,10 @@ namespace PizzaAbstractShopView
             {
                 try
                 {
-                    var view = logic.GetElement(id.Value);
+                    var view = logic.Read(new IngridientBindingModel { Id = id })?[0];
                     if (view != null)
                     {
-                        textBoxName.Text = view.ComponentName;
+                        textBoxName.Text = view.IngridientName;
                     }
                 }
                 catch (Exception ex)
@@ -55,21 +55,11 @@ namespace PizzaAbstractShopView
             }
             try
             {
-                if (id.HasValue)
+                logic.CreateOrUpdate(new IngridientBindingModel
                 {
-                    logic.UpdElement(new ComponentBindingModel
-                    {
-                        Id = id.Value,
-                        ComponentName = textBoxName.Text
-                    });
-                }
-                else
-                {
-                    logic.AddElement(new ComponentBindingModel
-                    {
-                        ComponentName = textBoxName.Text
-                    });
-                }
+                    Id = id,
+                    IngridientName = textBoxName.Text
+                });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

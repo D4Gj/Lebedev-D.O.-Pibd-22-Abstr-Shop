@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.labelComponent = new System.Windows.Forms.Label();
-            this.comboBoxComponent = new System.Windows.Forms.ComboBox();
+            this.comboBoxIngridient = new System.Windows.Forms.ComboBox();
             this.textBoxCount = new System.Windows.Forms.TextBox();
             this.labelAmount = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -47,11 +47,11 @@
             // 
             // comboBoxComponent
             // 
-            this.comboBoxComponent.FormattingEnabled = true;
-            this.comboBoxComponent.Location = new System.Drawing.Point(108, 29);
-            this.comboBoxComponent.Name = "comboBoxComponent";
-            this.comboBoxComponent.Size = new System.Drawing.Size(312, 24);
-            this.comboBoxComponent.TabIndex = 1;
+            this.comboBoxIngridient.FormattingEnabled = true;
+            this.comboBoxIngridient.Location = new System.Drawing.Point(108, 29);
+            this.comboBoxIngridient.Name = "comboBoxIngridient";
+            this.comboBoxIngridient.Size = new System.Drawing.Size(312, 24);
+            this.comboBoxIngridient.TabIndex = 1;
             // 
             // textBoxCount
             // 
@@ -98,7 +98,7 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelAmount);
             this.Controls.Add(this.textBoxCount);
-            this.Controls.Add(this.comboBoxComponent);
+            this.Controls.Add(this.comboBoxIngridient);
             this.Controls.Add(this.labelComponent);
             this.Name = "FormProductComponent";
             this.Text = "Компонент изделия";
@@ -110,7 +110,7 @@
         #endregion
 
         private System.Windows.Forms.Label labelComponent;
-        private System.Windows.Forms.ComboBox comboBoxComponent;
+        private System.Windows.Forms.ComboBox comboBoxIngridient;
         private System.Windows.Forms.TextBox textBoxCount;
         private System.Windows.Forms.Label labelAmount;
         private System.Windows.Forms.Button buttonSave;

@@ -15,31 +15,39 @@ using PizzaShopBusinessLogic.BindingModels;
 
 namespace PizzaAbstractShopView
 {
-    public partial class FormProducts : Form
+    public partial class FormPizza : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IProductLogic logic;
+        private readonly IPizzaShopLogic logic;
         private int? id;
-        private List<ProductComponentViewModel> productComponents;
-        public FormProducts(IProductLogic service)
+        private Dictionary<int, (string, int)> pizzaIngr;
+        public FormPizza(IPizzaShopLogic service)
         {
             InitializeComponent();
+            dataGridView.Columns.Add("Id", "Id");
+            dataGridView.Columns.Add("IngridientName", "Ингридиент");
+            dataGridView.Columns.Add("Count", "Количество");
+            dataGridView.Columns[0].Visible = false;
+            dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             this.logic = service;
         }
-        private void FormProduct_Load(object sender, EventArgs e)
+        private void FormPizza_Load(object sender, EventArgs e)
         {
             if (id.HasValue)
             {
                 try
                 {
-                    ProductViewModel view = logic.GetElement(id.Value);
+                    ProductViewModel view = logic.Read(new ProductBindingModel
+                    {
+                        Id = id.Value
+                    })?[0];
                     if (view != null)
                     {
-                        textBoxName.Text = view.ProductName;
+                        textBoxName.Text = view.PizzaName;
                         textBoxPrice.Text = view.Price.ToString();
-                        productComponents = view.ProductComponents;
+                        pizzaIngr = view.PizzaIngridients;
                         LoadData();
                     }
                 }
@@ -51,22 +59,20 @@ namespace PizzaAbstractShopView
             }
             else
             {
-                productComponents = new List<ProductComponentViewModel>();
+                pizzaIngr = new Dictionary<int, (string, int)>();
             }
         }
         private void LoadData()
         {
             try
             {
-                if (productComponents != null)
+                if (pizzaIngr != null)
                 {
-                    dataGridView.DataSource = null;
-                    dataGridView.DataSource = productComponents;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode =
-                   DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Rows.Clear();
+                    foreach (var pc in pizzaIngr)
+                    {
+                        dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
+                    }
                 }
             }
             catch (Exception ex)
@@ -81,13 +87,13 @@ namespace PizzaAbstractShopView
             var form = Container.Resolve<FormProductComponent>();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                if (form.ModelView != null)
+                if (pizzaIngr.ContainsKey(form.Id))
                 {
-                    if (id.HasValue)
-                    {
-                        form.ModelView.ProductId = id.Value;
-                    }
-                    productComponents.Add(form.ModelView);
+                    pizzaIngr[form.Id] = (form.IngridientName, form.Count);
+                }
+                else
+                {
+                    pizzaIngr.Add(form.Id, (form.IngridientName, form.Count));
                 }
                 LoadData();
             }
@@ -98,15 +104,15 @@ namespace PizzaAbstractShopView
             if (dataGridView.SelectedRows.Count == 1)
             {
                 var form = Container.Resolve<FormProductComponent>();
-                form.ModelView =
-               productComponents[dataGridView.SelectedRows[0].Cells[0].RowIndex];
+                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                form.Id = id;
+                form.Count = pizzaIngr[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    productComponents[dataGridView.SelectedRows[0].Cells[0].RowIndex] =
-                   form.ModelView;
+                    pizzaIngr[form.Id] = (form.IngridientName, form.Count);
                     LoadData();
                 }
-            }        
+            }
         }
 
         private void ButtonDel_Click(object sender, EventArgs e)
@@ -119,7 +125,7 @@ namespace PizzaAbstractShopView
                     try
                     {
 
-                        productComponents.RemoveAt(dataGridView.SelectedRows[0].Cells[0].RowIndex);
+                        pizzaIngr.Remove(dataGridView.SelectedRows[0].Cells[0].RowIndex);
                     }
                     catch (Exception ex)
                     {
@@ -150,7 +156,7 @@ namespace PizzaAbstractShopView
                MessageBoxIcon.Error);
                 return;
             }
-            if (productComponents == null || productComponents.Count == 0)
+            if (pizzaIngr == null || pizzaIngr.Count == 0)
             {
                 MessageBox.Show("Заполните компоненты", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
@@ -158,36 +164,13 @@ namespace PizzaAbstractShopView
             }
             try
             {
-                List<ProductComponentBindingModel> productComponentBM = new
-               List<ProductComponentBindingModel>(); for (int i = 0; i < productComponents.Count; ++i)
+                logic.CreateOrUpdate(new ProductBindingModel
                 {
-                    productComponentBM.Add(new ProductComponentBindingModel
-                    {
-                        Id = productComponents[i].Id,
-                        ProductId = productComponents[i].ProductId,
-                        ComponentId = productComponents[i].ComponentId,
-                        Count = productComponents[i].Count
-                    });
-                }
-                if (id.HasValue)
-                {
-                    logic.UpdElement(new ProductBindingModel
-                    {
-                        Id = id.Value,
-                        ProductName = textBoxName.Text,
-                        Price = Convert.ToDecimal(textBoxPrice.Text),
-                        ProductComponents = productComponentBM
-                    });
-                }
-                else
-                {
-                    logic.AddElement(new ProductBindingModel
-                    {
-                        ProductName = textBoxName.Text,
-                        Price = Convert.ToDecimal(textBoxPrice.Text),
-                        ProductComponents = productComponentBM
-                    });
-                }
+                    Id = id,
+                    PizzaName = textBoxName.Text,
+                    Price = Convert.ToDecimal(textBoxPrice.Text),
+                    PizzaIngridients = pizzaIngr
+                });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

@@ -7,6 +7,8 @@ using Unity;
 using Unity.Lifetime;
 using PizzaShopListImplement.Implements;
 using PizzaShopBusinessLogic.Interfaces;
+using PizzaShopBusinessLogic.BusinessLogic;
+
 
 namespace PizzaAbstractShopView
 {
@@ -23,12 +25,13 @@ namespace PizzaAbstractShopView
         private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new
+            currentContainer.RegisterType<IIngridientLogic, IngridientLogic>(new
            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IProductLogic, ProductLogic>(new
+            currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IMainLogic, MainLogic>(new
+            currentContainer.RegisterType<IPizzaShopLogic, ProductLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

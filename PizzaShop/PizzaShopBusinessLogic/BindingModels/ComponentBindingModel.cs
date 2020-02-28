@@ -4,9 +4,9 @@ using System.Text;
 
 namespace PizzaShopBusinessLogic.BindingModels
 {
-    public class ComponentBindingModel
+    public class IngridientBindingModel
     {
-        public int Id { get; set; }
-        public string ComponentName { get; set; }
-    }
+        public int? Id { get; set; }
+        public string IngridientName { get; set; }
+    }
 }

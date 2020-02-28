@@ -9,9 +9,9 @@ namespace PizzaShopBusinessLogic.ViewModels
     public class OrderViewModel
     {
         public int Id { get; set; }
-        public int ProductId { get; set; }
+        public int PizzaId { get; set; }
         [DisplayName("Изделие")]
-        public string ProductName { get; set; }
+        public string PizzaName { get; set; }
         [DisplayName("Количество")]
         public int Count { get; set; }
         [DisplayName("Сумма")]

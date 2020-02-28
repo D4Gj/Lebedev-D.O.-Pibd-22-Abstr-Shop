@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.Interfaces;
-using PizzaShopBusinessLogic.ViewModels;
+using PizzaShopBusinessLogic.BusinessLogic;
 using Unity;
 
 namespace PizzaAbstractShopView
@@ -18,11 +18,13 @@ namespace PizzaAbstractShopView
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly IMainLogic logic;
-        public FormMain(IMainLogic logic)
+        private readonly MainLogic logic;
+        private readonly IOrderLogic orderLogic;
+        public FormMain(MainLogic logic,IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
+            this.orderLogic = orderLogic;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -32,7 +34,14 @@ namespace PizzaAbstractShopView
         {
             try
             {
-                // как же его реализовать…
+                var list = orderLogic.Read(null);
+                if (list != null)
+                {
+                    dataGridView.DataSource = list;
+                    dataGridView.Columns[0].Visible = false;
+                    dataGridView.Columns[1].Visible = false;
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
             }
             catch (Exception ex)
             {
@@ -43,13 +52,13 @@ namespace PizzaAbstractShopView
 
         private void КомпонентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormComponents>();
+            var form = Container.Resolve<FormAmountIngridients>();
             form.ShowDialog();
         }
 
         private void ИзделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormProducts>();
+            var form = Container.Resolve<FormAmountPizza>();
             form.ShowDialog();
         }
 
@@ -67,7 +76,7 @@ namespace PizzaAbstractShopView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.TakeOrderInWork(new OrderBindingModel { Id = id });
+                    logic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -85,7 +94,7 @@ namespace PizzaAbstractShopView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.FinishOrder(new OrderBindingModel { Id = id });
+                    logic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -103,7 +112,7 @@ namespace PizzaAbstractShopView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.PayOrder(new OrderBindingModel { Id = id });
+                    logic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace PizzaShopListImplement.Models
 {
-    public class Component
+    public class Ingridient
     {
         public int Id { get; set; }
-        public string ComponentName { get; set; }
+        public string IngridientName { get; set; }
     }
 }

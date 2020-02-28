@@ -1,6 +1,6 @@
 ﻿namespace PizzaAbstractShopView
 {
-    partial class FormComponent
+    partial class FormNameIngridient
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -70,7 +70,7 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
-            // FormComponent
+            // FormNameIngridient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -79,7 +79,7 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelFormNazv);
             this.Controls.Add(this.textBoxName);
-            this.Name = "FormComponent";
+            this.Name = "FormNameIngridient";
             this.Text = "Компонент";
             this.ResumeLayout(false);
             this.PerformLayout();

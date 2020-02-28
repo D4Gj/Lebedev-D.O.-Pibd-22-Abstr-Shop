@@ -4,10 +4,11 @@ using System.Text;
 
 namespace PizzaShopListImplement.Models
 {
-    public class Product
+    public class PizzaIngredient
     {
         public int Id { get; set; }
-        public string ProductName { get; set; }
-        public decimal Price { get; set; }
+        public int PizzaId { get; set; }
+        public int IngridientID { get; set; }
+        public int Count { get; set; }
     }
 }

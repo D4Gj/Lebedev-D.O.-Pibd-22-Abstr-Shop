@@ -18,36 +18,30 @@ namespace PizzaAbstractShopView
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        public ProductComponentViewModel ModelView { get; set; }
-        private readonly IComponentLogic logic;
-        public FormProductComponent(IComponentLogic logic)
+        public int Id
+        {
+            get { return Convert.ToInt32(comboBoxIngridient.SelectedValue); }
+            set { comboBoxIngridient.SelectedValue = value; }
+        }
+        public string IngridientName { get { return comboBoxIngridient.Text; } }
+        public int Count
+        {
+            get { return Convert.ToInt32(textBoxCount.Text); }
+            set
+            {
+                textBoxCount.Text = value.ToString();
+            }
+        }
+        public FormProductComponent(IIngridientLogic logic)
         {
             InitializeComponent();
-            this.logic = logic;
-        }
-        private void FormProductComponent_Load(object sender, EventArgs e)
-        {
-            try
+            List<IngridientViewModel> list = logic.Read(null);
+            if (list != null)
             {
-                List<ComponentViewModel> list = logic.GetList();
-                if (list != null)
-                {
-                    comboBoxComponent.DisplayMember = "ComponentName";
-                    comboBoxComponent.ValueMember = "Id";
-                    comboBoxComponent.DataSource = list;
-                    comboBoxComponent.SelectedItem = null;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
-            }
-            if (ModelView != null)
-            {
-                comboBoxComponent.Enabled = false;
-                comboBoxComponent.SelectedValue = ModelView.ComponentId;
-                textBoxCount.Text = ModelView.Count.ToString();
+                comboBoxIngridient.DisplayMember = "IngridientName";
+                comboBoxIngridient.ValueMember = "Id";
+                comboBoxIngridient.DataSource = list;
+                //comboBoxIngridient.SelectedItem = null;
             }
         }
 
@@ -59,40 +53,15 @@ namespace PizzaAbstractShopView
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxComponent.SelectedValue == null)
+            if (comboBoxIngridient.SelectedValue == null)
             {
                 MessageBox.Show("Выберите компонент", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
                 return;
             }
-            try
-            {
-                if (ModelView == null)
-                {
-                    ModelView = new ProductComponentViewModel
-                    {
-                        ComponentId = Convert.ToInt32(comboBoxComponent.SelectedValue),
-                        ComponentName = comboBoxComponent.Text,
-                        Count = Convert.ToInt32(textBoxCount.Text)
-                    };
-                }
-                else
-                {
-                    ModelView.Count = Convert.ToInt32(textBoxCount.Text);
-                }
-                MessageBox.Show("Сохранение прошло успешно", "Сообщение",
-               MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
-            }
-
+            DialogResult = DialogResult.OK;
+            Close();
         }
-
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

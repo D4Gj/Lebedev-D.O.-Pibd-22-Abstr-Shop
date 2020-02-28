@@ -11,6 +11,7 @@ using Unity;
 using PizzaShopBusinessLogic.Interfaces;
 using PizzaShopBusinessLogic.ViewModels;
 using PizzaShopBusinessLogic.BindingModels;
+using PizzaShopBusinessLogic.BusinessLogic;
 
 namespace PizzaAbstractShopView
 {
@@ -18,9 +19,9 @@ namespace PizzaAbstractShopView
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly IProductLogic logicP;
-        private readonly IMainLogic logicM;
-        public FormCreateOrder(IProductLogic logicP, IMainLogic logicM)
+        private readonly IPizzaShopLogic logicP;
+        private readonly MainLogic logicM;
+        public FormCreateOrder(IPizzaShopLogic logicP, MainLogic logicM)
         {
             InitializeComponent();
             this.logicP = logicP;
@@ -30,11 +31,11 @@ namespace PizzaAbstractShopView
         {
             try
             {
-                var listP = logicP.GetList();
+                var listP = logicP.Read(null);
 
                 if (listP != null)
                 {
-                    comboBoxProduct.DisplayMember = "ProductName";
+                    comboBoxProduct.DisplayMember = "PizzaName";
                     comboBoxProduct.ValueMember = "Id";
                     comboBoxProduct.DataSource = listP;
                     comboBoxProduct.SelectedItem = null;
@@ -55,7 +56,10 @@ namespace PizzaAbstractShopView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
-                    ProductViewModel product = logicP.GetElement(id);
+                    ProductViewModel product = logicP.Read(new ProductBindingModel
+                    {
+                        Id = id
+                    })?[0];
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxSum.Text = (count * product.Price).ToString();
                 }
@@ -93,9 +97,9 @@ namespace PizzaAbstractShopView
             }
             try
             {
-                logicM.CreateOrder(new OrderBindingModel
+                logicM.CreateOrder(new CreateOrderBindingModel
                 {
-                    ProductId = Convert.ToInt32(comboBoxProduct.SelectedValue),
+                    PizzaId = Convert.ToInt32(comboBoxProduct.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });

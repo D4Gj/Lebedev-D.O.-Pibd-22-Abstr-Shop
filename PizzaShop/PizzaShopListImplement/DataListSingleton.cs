@@ -7,16 +7,16 @@ namespace PizzaShopListImplement
     public class DataListSingleton
     {
         private static DataListSingleton instance;
-        public List<Component> Components { get; set; }
+        public List<Ingridient> Ingridients { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Product> Products { get; set; }
-        public List<ProductComponent> ProductComponents { get; set; }
+        public List<Pizza> Pizzas { get; set; }
+        public List<PizzaIngredient> PizzaIngredients { get; set; }
         private DataListSingleton()
         {
-            Components = new List<Component>();
+            Ingridients = new List<Ingridient>();
             Orders = new List<Order>();
-            Products = new List<Product>();
-            ProductComponents = new List<ProductComponent>();
+            Pizzas = new List<Pizza>();
+            PizzaIngredients = new List<PizzaIngredient>();
         }
         public static DataListSingleton GetInstance()
         {

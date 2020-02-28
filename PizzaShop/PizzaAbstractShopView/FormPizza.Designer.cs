@@ -1,6 +1,6 @@
 ﻿namespace PizzaAbstractShopView
 {
-    partial class FormProducts
+    partial class FormPizza
     {
         /// <summary>
         /// Required designer variable.

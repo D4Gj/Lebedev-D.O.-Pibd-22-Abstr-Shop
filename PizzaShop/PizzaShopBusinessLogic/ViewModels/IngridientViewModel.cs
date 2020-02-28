@@ -5,10 +5,10 @@ using System.ComponentModel;
 
 namespace PizzaShopBusinessLogic.ViewModels
 {
-    public class ComponentViewModel
+    public class IngridientViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Название компонента")]
-        public string ComponentName { get; set; }
+        [DisplayName("Название ингредиента")]
+        public string IngridientName { get; set; }
     }
 }
