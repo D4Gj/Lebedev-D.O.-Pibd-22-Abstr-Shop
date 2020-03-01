@@ -148,6 +148,10 @@
       <Project>{38ea7afc-de3f-4781-9f27-bb767451d397}</Project>
       <Name>PizzaShopBusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PizzaShopFileImplement\PizzaShopFileImplement.csproj">
+      <Project>{9a490aa9-e1ef-40d6-a2a8-64b3a8c1b542}</Project>
+      <Name>PizzaShopFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PizzaShopListImplement\PizzaShopListImplement.csproj">
       <Project>{c772debe-45c4-44c8-af76-bd65a0fab865}</Project>
       <Name>PizzaShopListImplement</Name>
