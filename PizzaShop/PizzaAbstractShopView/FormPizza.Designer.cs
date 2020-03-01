@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelPrice = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxComponents = new System.Windows.Forms.GroupBox();
             this.buttonRef = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonUpd = new System.Windows.Forms.Button();
@@ -40,27 +40,27 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxComponents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Название:";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(24, 25);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(76, 17);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Название:";
             // 
-            // label2
+            // labelPrice
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Цена:";
+            this.labelPrice.AutoSize = true;
+            this.labelPrice.Location = new System.Drawing.Point(24, 59);
+            this.labelPrice.Name = "labelPrice";
+            this.labelPrice.Size = new System.Drawing.Size(47, 17);
+            this.labelPrice.TabIndex = 1;
+            this.labelPrice.Text = "Цена:";
             // 
             // textBoxName
             // 
@@ -76,19 +76,19 @@
             this.textBoxPrice.Size = new System.Drawing.Size(152, 22);
             this.textBoxPrice.TabIndex = 3;
             // 
-            // groupBox1
+            // groupBoxComponents
             // 
-            this.groupBox1.Controls.Add(this.buttonRef);
-            this.groupBox1.Controls.Add(this.buttonDel);
-            this.groupBox1.Controls.Add(this.buttonUpd);
-            this.groupBox1.Controls.Add(this.buttonAdd);
-            this.groupBox1.Controls.Add(this.dataGridView);
-            this.groupBox1.Location = new System.Drawing.Point(31, 106);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(643, 279);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Компоненты";
+            this.groupBoxComponents.Controls.Add(this.buttonRef);
+            this.groupBoxComponents.Controls.Add(this.buttonDel);
+            this.groupBoxComponents.Controls.Add(this.buttonUpd);
+            this.groupBoxComponents.Controls.Add(this.buttonAdd);
+            this.groupBoxComponents.Controls.Add(this.dataGridView);
+            this.groupBoxComponents.Location = new System.Drawing.Point(31, 106);
+            this.groupBoxComponents.Name = "groupBoxComponents";
+            this.groupBoxComponents.Size = new System.Drawing.Size(643, 279);
+            this.groupBoxComponents.TabIndex = 4;
+            this.groupBoxComponents.TabStop = false;
+            this.groupBoxComponents.Text = "Компоненты";
             // 
             // buttonRef
             // 
@@ -167,15 +167,15 @@
             this.ClientSize = new System.Drawing.Size(702, 450);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxComponents);
             this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.textBoxName);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelPrice);
+            this.Controls.Add(this.labelName);
             this.Name = "FormPizza";
             this.Text = "Пицца";
             this.Load += new System.EventHandler(this.FormPizza_Load);
-            this.groupBox1.ResumeLayout(false);
+            this.groupBoxComponents.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -184,11 +184,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxPrice;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxComponents;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonRef;
         private System.Windows.Forms.Button buttonDel;
