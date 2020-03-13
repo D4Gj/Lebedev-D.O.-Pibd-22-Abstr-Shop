@@ -63,7 +63,7 @@ namespace PizzaShopFileImplement.Implements
                 Id = rec.Id,
                 Count = rec.Count,
                 PizzaName = Convert.ToString(source.Pizza.Where(recPC => recPC.Id==rec.PizzaId)
-                .FirstOrDefault(recC => recC.Id==rec.PizzaId).PizzaName),
+                .FirstOrDefault(recC => recC.Id==rec.PizzaId).PizzaName)`,
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement,
                 PizzaId = rec.PizzaId,
