@@ -10,15 +10,13 @@ namespace PizzaShopDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=HOME\SQLEXPRESS;Initial
-            Catalog=AbstractShopDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-0S6SE5G\SQLEXPRESS;Initial Catalog=PizzaShopDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
         public virtual DbSet<Ingridient> Ingridients { set; get; }
         public virtual DbSet<Pizza> Pizzas { set; get; }
-        public virtual DbSet<PizzaIngridient> ProductComponents { set; get; }
+        public virtual DbSet<PizzaIngridient> PizzaIngridients { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
-
     }
 }

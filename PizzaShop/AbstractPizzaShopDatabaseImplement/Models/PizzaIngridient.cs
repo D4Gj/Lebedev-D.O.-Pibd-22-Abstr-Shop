@@ -13,7 +13,7 @@ namespace PizzaShopDatabaseImplement.Models
         public int IngridientId { get; set; }
         [Required]
         public int Count { get; set; }
-        public virtual Ingridient Component { get; set; }
+        public virtual Ingridient Ingridient { get; set; }
         public virtual Pizza Pizza { get; set; }
     }
 }
