@@ -8,8 +8,8 @@ namespace PizzaShopBusinessLogic.Interfaces
 {
     public interface IPizzaShopLogic
     {
-        List<ProductViewModel> Read(ProductBindingModel model);
-        void CreateOrUpdate(ProductBindingModel model);
-        void Delete(ProductBindingModel model);
+        List<PizzaViewModel> Read(PizzaBindingModel model);
+        void CreateOrUpdate(PizzaBindingModel model);
+        void Delete(PizzaBindingModel model);
     }
 }

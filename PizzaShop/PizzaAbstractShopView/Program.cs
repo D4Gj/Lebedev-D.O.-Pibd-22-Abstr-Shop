@@ -29,7 +29,7 @@ namespace PizzaAbstractShopView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IPizzaShopLogic, ProductLogic>(new
+            currentContainer.RegisterType<IPizzaShopLogic, PizzaLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             return currentContainer;

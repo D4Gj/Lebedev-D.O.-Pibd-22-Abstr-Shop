@@ -39,7 +39,7 @@ namespace PizzaAbstractShopView
             {
                 try
                 {
-                    ProductViewModel view = logic.Read(new ProductBindingModel
+                    PizzaViewModel view = logic.Read(new PizzaBindingModel
                     {
                         Id = id.Value
                     })?[0];
@@ -84,7 +84,7 @@ namespace PizzaAbstractShopView
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormProductComponent>();
+            var form = Container.Resolve<FormPizzaIngridient>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (pizzaIngr.ContainsKey(form.Id))
@@ -103,7 +103,7 @@ namespace PizzaAbstractShopView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormProductComponent>();
+                var form = Container.Resolve<FormPizzaIngridient>();
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 form.Id = id;
                 form.Count = pizzaIngr[id].Item2;
@@ -164,7 +164,7 @@ namespace PizzaAbstractShopView
             }
             try
             {
-                logic.CreateOrUpdate(new ProductBindingModel
+                logic.CreateOrUpdate(new PizzaBindingModel
                 {
                     Id = id,
                     PizzaName = textBoxName.Text,
