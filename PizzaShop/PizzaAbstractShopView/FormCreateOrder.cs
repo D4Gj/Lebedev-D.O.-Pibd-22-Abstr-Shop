@@ -56,7 +56,7 @@ namespace PizzaAbstractShopView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
-                    ProductViewModel product = logicP.Read(new ProductBindingModel
+                    PizzaViewModel product = logicP.Read(new PizzaBindingModel
                     {
                         Id = id
                     })?[0];
