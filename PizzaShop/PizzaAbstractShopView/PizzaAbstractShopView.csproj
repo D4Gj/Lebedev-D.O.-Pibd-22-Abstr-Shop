@@ -79,6 +79,12 @@
     <Compile Include="FormCreateOrder.Designer.cs">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDisplayIngridients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDisplayIngridients.Designer.cs">
+      <DependentUpon>FormDisplayIngridients.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,12 @@
     <Compile Include="FormProductComponent.Designer.cs">
       <DependentUpon>FormProductComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormStorageIngridients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStorageIngridients.Designer.cs">
+      <DependentUpon>FormStorageIngridients.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAmountPizza.resx">
@@ -111,6 +123,9 @@
     <EmbeddedResource Include="FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormDisplayIngridients.resx">
+      <DependentUpon>FormDisplayIngridients.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProductComponent.resx">
       <DependentUpon>FormProductComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStorageIngridients.resx">
+      <DependentUpon>FormStorageIngridients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

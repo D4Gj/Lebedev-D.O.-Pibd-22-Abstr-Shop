@@ -4,12 +4,16 @@ using System.Text;
 using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.Enums;
 using PizzaShopBusinessLogic.Interfaces;
+using PizzaShopBusinessLogic.ViewModels;
 
 namespace PizzaShopBusinessLogic.BusinessLogic
 {
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
+        private readonly IStorageLogic storageLogic;
+        private readonly IIngridientLogic ingridientLogic;
+        
         public MainLogic(IOrderLogic orderLogic)
         {
             this.orderLogic = orderLogic;
@@ -92,6 +96,20 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов
+            });
+        }
+        public void AddMaterials(StorageViewModel storage, int count, IngridientViewModel material)
+        {
+            if (storage.StoragedMaterials.ContainsKey(material.Id))
+                storage.StoragedMaterials[material.Id] =
+                    (storage.StoragedMaterials[material.Id].Item1, storage.StoragedMaterials[material.Id].Item2 + count);
+            else
+                storage.StoragedMaterials.Add(material.Id, (material.IngridientName, count));
+            storageLogic.CreateOrUpdate(new StorageBindingModel()
+            {
+                Id = storage.Id,
+                StorageName = storage.StorageName,
+                StoragedMaterials = storage.StoragedMaterials
             });
         }
     }
