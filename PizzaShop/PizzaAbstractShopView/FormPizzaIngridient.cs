@@ -41,7 +41,7 @@ namespace PizzaAbstractShopView
                 comboBoxIngridient.DisplayMember = "IngridientName";
                 comboBoxIngridient.ValueMember = "Id";
                 comboBoxIngridient.DataSource = list;
-                //comboBoxIngridient.SelectedItem = null;
+                comboBoxIngridient.SelectedItem = null;
             }
         }
 
