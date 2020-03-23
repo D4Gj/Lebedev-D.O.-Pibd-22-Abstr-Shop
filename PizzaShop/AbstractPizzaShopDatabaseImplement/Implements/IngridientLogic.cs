@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace PizzaShopDatabaseImplement.Implements
 {
-    class IngridientLogic : IIngridientLogic
+    public class IngridientLogic : IIngridientLogic
     {
         public void CreateOrUpdate(IngridientBindingModel model)
         {
@@ -25,12 +25,12 @@ namespace PizzaShopDatabaseImplement.Implements
                 {
                     element = context.Ingridients.FirstOrDefault(rec => rec.Id ==
                    model.Id);
-                }
-                if (element == null)
-                {
-                    throw new Exception("Элемент не найден");
-                }
 
+                    if (element == null)
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                }
                 else
                 {
                     element = new Ingridient();
