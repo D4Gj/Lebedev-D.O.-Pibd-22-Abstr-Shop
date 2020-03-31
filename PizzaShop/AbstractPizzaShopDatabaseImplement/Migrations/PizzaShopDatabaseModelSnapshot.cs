@@ -56,9 +56,6 @@ namespace PizzaShopDatabaseImplement.Migrations
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PizzaId")
                         .HasColumnType("int");
 
@@ -70,7 +67,7 @@ namespace PizzaShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("PizzaId");
 
                     b.ToTable("Orders");
                 });
@@ -130,7 +127,9 @@ namespace PizzaShopDatabaseImplement.Migrations
                 {
                     b.HasOne("PizzaShopDatabaseImplement.Models.Pizza", "Pizza")
                         .WithMany("Orders")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PizzaShopDatabaseImplement.Models.PizzaIngridient", b =>

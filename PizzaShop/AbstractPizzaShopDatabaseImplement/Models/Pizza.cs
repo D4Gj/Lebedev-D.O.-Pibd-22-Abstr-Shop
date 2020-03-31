@@ -15,9 +15,9 @@ namespace PizzaShopDatabaseImplement.Models
 
         [Required]
         public decimal Price { get; set; }
-        [ForeignKey("PizzaId")]
+       
         public virtual List<PizzaIngridient> PizzaIngridients { get; set; }
-        [ForeignKey("OrderId")]
+       
         public virtual List<Order> Orders { get; set; }
     }
 }

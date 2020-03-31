@@ -52,18 +52,17 @@ namespace PizzaShopDatabaseImplement.Migrations
                     Sum = table.Column<decimal>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     DateCreate = table.Column<DateTime>(nullable: false),
-                    DateImplement = table.Column<DateTime>(nullable: true),
-                    OrderId = table.Column<int>(nullable: true)
+                    DateImplement = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Pizzas_OrderId",
-                        column: x => x.OrderId,
+                        name: "FK_Orders_Pizzas_PizzaId",
+                        column: x => x.PizzaId,
                         principalTable: "Pizzas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,9 +98,9 @@ namespace PizzaShopDatabaseImplement.Migrations
                 column: "IngridientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_OrderId",
+                name: "IX_Orders_PizzaId",
                 table: "Orders",
-                column: "OrderId");
+                column: "PizzaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PizzaIngridients_IngridientId",

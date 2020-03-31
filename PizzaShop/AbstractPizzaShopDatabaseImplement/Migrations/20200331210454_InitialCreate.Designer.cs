@@ -10,7 +10,7 @@ using PizzaShopDatabaseImplement;
 namespace PizzaShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(PizzaShopDatabase))]
-    [Migration("20200322213156_InitialCreate")]
+    [Migration("20200331210454_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,9 +58,6 @@ namespace PizzaShopDatabaseImplement.Migrations
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PizzaId")
                         .HasColumnType("int");
 
@@ -72,7 +69,7 @@ namespace PizzaShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("PizzaId");
 
                     b.ToTable("Orders");
                 });
@@ -132,7 +129,9 @@ namespace PizzaShopDatabaseImplement.Migrations
                 {
                     b.HasOne("PizzaShopDatabaseImplement.Models.Pizza", "Pizza")
                         .WithMany("Orders")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PizzaShopDatabaseImplement.Models.PizzaIngridient", b =>
