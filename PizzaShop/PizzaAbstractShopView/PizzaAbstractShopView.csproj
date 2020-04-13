@@ -153,11 +153,11 @@
     <Compile Include="FormAmountPizza.Designer.cs">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormComponent.cs">
+    <Compile Include="FormIngridient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormComponent.Designer.cs">
-      <DependentUpon>FormComponent.cs</DependentUpon>
+    <Compile Include="FormIngridient.Designer.cs">
+      <DependentUpon>FormIngridient.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAmountIngridients.cs">
       <SubType>Form</SubType>
@@ -183,19 +183,19 @@
     <Compile Include="FormPizza.Designer.cs">
       <DependentUpon>FormPizza.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProductComponent.cs">
+    <Compile Include="FormPizzaIngridient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProductComponent.Designer.cs">
-      <DependentUpon>FormProductComponent.cs</DependentUpon>
+    <Compile Include="FormPizzaIngridient.Designer.cs">
+      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAmountPizza.resx">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormComponent.resx">
-      <DependentUpon>FormComponent.cs</DependentUpon>
+    <EmbeddedResource Include="FormIngridient.resx">
+      <DependentUpon>FormIngridient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAmountIngridients.resx">
       <DependentUpon>FormAmountIngridients.cs</DependentUpon>
@@ -209,8 +209,8 @@
     <EmbeddedResource Include="FormPizza.resx">
       <DependentUpon>FormPizza.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProductComponent.resx">
-      <DependentUpon>FormProductComponent.cs</DependentUpon>
+    <EmbeddedResource Include="FormPizzaIngridient.resx">
+      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
