@@ -3,6 +3,9 @@ using System.Windows.Forms;
 using Unity;
 using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.BusinessLogic;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace PizzaAbstractShopView
 {
@@ -15,6 +18,10 @@ namespace PizzaAbstractShopView
         {
             InitializeComponent();
             this.logic = logic;
+            dataGridView.Columns.Add("Дата", "Дата");
+            dataGridView.Columns.Add("Заказ", "Заказ");
+            dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns.Add("Сумма заказа", "Сумма заказа");
         }
 
         private void buttonSaveToExcel_Click(object sender, EventArgs e)
@@ -27,7 +34,9 @@ namespace PizzaAbstractShopView
                     {
                         logic.SaveProductComponentToExcelFile(new ReportBindingModel
                         {
-                            FileName = dialog.FileName
+                            FileName = dialog.FileName,
+                            DateFrom = dateTimePickerFrom.Value.Date,
+                            DateTo = dateTimePickerTo.Value.Date,
                         });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -42,30 +51,55 @@ namespace PizzaAbstractShopView
 
         }
 
-        private void FormReportPizzaIngridients_Load(object sender, EventArgs e)
+        private void buttonRefClick(object sender, EventArgs e)
         {
+            if (dateTimePickerFrom.Value.Date > dateTimePickerTo.Value.Date)
+            {
+                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
-                var dict = logic.GetProductComponent();
+                var dict = logic.GetOrders(new ReportBindingModel
+                {
+                    DateFrom = dateTimePickerFrom.Value.Date,
+                    DateTo = dateTimePickerTo.Value.Date
+                });
+                List<DateTime> dates = new List<DateTime>();
+                foreach (var order in dict)
+                {
+                    if (!dates.Contains(order.DateCreate.Date))
+                    {
+                        dates.Add(order.DateCreate.Date);
+                    }
+                }
+
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
-                    foreach (var elem in dict)
+                    foreach (var date in dates)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.PizzaName, "", ""});
-                        foreach (var listElem in elem.Pizzas)
+                        decimal GenSum = 0;
+                        dataGridView.Rows.Add(new object[]
                         {
-                            dataGridView.Rows.Add(new object[] { "", listElem.Item1,listElem.Item2 });
+                            date.Date.ToShortDateString()
+                        });
+
+                        foreach (var order in dict.Where(rec => rec.DateCreate.Date == date.Date))
+                        {
+                            dataGridView.Rows.Add(new object[] { "", order.PizzaName, order.Sum });
+                            GenSum += order.Sum;
                         }
-                        dataGridView.Rows.Add(new object[] { "Итого", "", elem.TotalCount});
-                        dataGridView.Rows.Add(new object[] { });
+                        dataGridView.Rows.Add(new object[]
+                        {
+                            "Итог:", "", GenSum
+                        });
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

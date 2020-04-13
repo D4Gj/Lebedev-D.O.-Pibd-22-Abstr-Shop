@@ -49,7 +49,30 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             return list;
         }
 
-                
+        public List<ReportPizzaOrdersViewModel> GetPizzaIngridient()
+        {
+            var ingridients = ingridientLogic.Read(null);
+            var pizzas = pizzaShopLogic.Read(null);
+            var list = new List<ReportPizzaOrdersViewModel>();
+            foreach (var ingridient in ingridients)
+            {
+                foreach (var pizza in pizzas)
+                {
+                    if (pizza.PizzaIngridients.ContainsKey(ingridient.Id))
+                    {
+                        var record = new ReportPizzaOrdersViewModel
+                        {                            
+                            PizzaName = pizza.PizzaName,
+                            IngridientName = ingridient.IngridientName,
+                            Count = pizza.PizzaIngridients[ingridient.Id].Item2
+                        };
+                        list.Add(record);
+                    }
+                }
+            }
+            return list;
+        }
+
         public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
         {
             return orderLogic.Read(new OrderBindingModel
@@ -84,8 +107,10 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список пицц",
-                Pizzas = pizzaShopLogic.Read(null)
+                Title = "Список заказов",
+                DateFrom = model.DateFrom.Value,
+                DateTo = model.DateTo.Value,
+                Orders = GetOrders(model)
             });
         }
 
@@ -94,10 +119,8 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Список заказов",
-                DateFrom = model.DateFrom.Value,
-                DateTo = model.DateTo.Value,
-                Orders = GetOrders(model)
+                Title = "Список пицц",
+                Pizzas = GetPizzaIngridient()            
             });
         }
     }

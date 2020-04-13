@@ -30,9 +30,9 @@
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonSaveToExcel = new System.Windows.Forms.Button();
-            this.ColumnIngridient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPizza = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.buttonRef = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,56 +43,60 @@
             this.dataGridView.AllowUserToOrderColumns = true;
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnIngridient,
-            this.ColumnPizza,
-            this.ColumnCount});
             this.dataGridView.Location = new System.Drawing.Point(1, 29);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            this.dataGridView.Size = new System.Drawing.Size(538, 480);
+            this.dataGridView.Size = new System.Drawing.Size(560, 480);
             this.dataGridView.TabIndex = 0;
             // 
             // buttonSaveToExcel
             // 
-            this.buttonSaveToExcel.Location = new System.Drawing.Point(16, 5);
+            this.buttonSaveToExcel.Location = new System.Drawing.Point(12, 1);
             this.buttonSaveToExcel.Name = "buttonSaveToExcel";
-            this.buttonSaveToExcel.Size = new System.Drawing.Size(179, 24);
+            this.buttonSaveToExcel.Size = new System.Drawing.Size(133, 24);
             this.buttonSaveToExcel.TabIndex = 1;
             this.buttonSaveToExcel.Text = "Сохранить в Excel";
             this.buttonSaveToExcel.UseVisualStyleBackColor = true;
             this.buttonSaveToExcel.Click += new System.EventHandler(this.buttonSaveToExcel_Click);
             // 
-            // ColumnIngridient
+            // dateTimePickerFrom
             // 
-            this.ColumnIngridient.HeaderText = "Ингридиент";
-            this.ColumnIngridient.Name = "ColumnIngridient";
-            this.ColumnIngridient.ReadOnly = true;
-            this.ColumnIngridient.Width = 200;
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(236, 5);
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(142, 20);
+            this.dateTimePickerFrom.TabIndex = 2;
             // 
-            // ColumnPizza
+            // dateTimePickerTo
             // 
-            this.ColumnPizza.HeaderText = "Пицца";
-            this.ColumnPizza.Name = "ColumnPizza";
-            this.ColumnPizza.ReadOnly = true;
-            this.ColumnPizza.Width = 150;
+            this.dateTimePickerTo.Location = new System.Drawing.Point(417, 5);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(144, 20);
+            this.dateTimePickerTo.TabIndex = 3;
             // 
-            // ColumnCount
+            // buttonRef
             // 
-            this.ColumnCount.HeaderText = "Количество";
-            this.ColumnCount.Name = "ColumnCount";
-            this.ColumnCount.ReadOnly = true;
+            this.buttonRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonRef.Location = new System.Drawing.Point(164, 2);
+            this.buttonRef.Name = "buttonRef";
+            this.buttonRef.Size = new System.Drawing.Size(52, 23);
+            this.buttonRef.TabIndex = 4;
+            this.buttonRef.Text = "\t↻";
+            this.buttonRef.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonRef.UseVisualStyleBackColor = true;
+            this.buttonRef.Click += new System.EventHandler(this.buttonRefClick);
             // 
             // FormReportPizzaIngridients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 508);
+            this.ClientSize = new System.Drawing.Size(562, 508);
+            this.Controls.Add(this.buttonRef);
+            this.Controls.Add(this.dateTimePickerTo);
+            this.Controls.Add(this.dateTimePickerFrom);
             this.Controls.Add(this.buttonSaveToExcel);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormReportPizzaIngridients";
             this.Text = "Ингридиенты пицц";
-            this.Load += new System.EventHandler(this.FormReportPizzaIngridients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -102,8 +106,8 @@
 
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonSaveToExcel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIngridient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPizza;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCount;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
+        private System.Windows.Forms.Button buttonRef;
     }
 }

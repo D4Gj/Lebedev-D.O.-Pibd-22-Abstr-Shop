@@ -304,6 +304,7 @@
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductComponentViewModel.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductViewModel.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportPizzaOrdersViewModel.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

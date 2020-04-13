@@ -18,13 +18,9 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             Paragraph paragraph = section.AddParagraph(info.Title);
             paragraph.Format.SpaceAfter = "1cm";
             paragraph.Format.Alignment = ParagraphAlignment.Center;
-            paragraph.Style = "NormalTitle";
-            paragraph = section.AddParagraph($"с {info.DateFrom.ToShortDateString()} по { info.DateTo.ToShortDateString()} ");
- paragraph.Format.SpaceAfter = "1cm";
-            paragraph.Format.Alignment = ParagraphAlignment.Center;
-            paragraph.Style = "Normal";
+            paragraph.Style = "NormalTitle"; 
             var table = document.LastSection.AddTable();
-            List<string> columns = new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm"
+            List<string> columns = new List<string> { "3cm", "6cm", "3cm"
 };
             foreach (var elem in columns)
             {
@@ -33,18 +29,18 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             CreateRow(new PdfRowParameters
             {
                 Table = table,
-                Texts = new List<string> { "Дата заказа", "Изделие", "Количество",
-"Сумма", "Статус" },
+                Texts = new List<string> { "Пицца", "Изделие", "Количество" },
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
-            foreach (var order in info.Orders)
+            foreach (var pizza in info.Pizzas)
             {
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(),order.PizzaName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString()
-},
+                    Texts = new List<string> { pizza.PizzaName,
+                        pizza.IngridientName,
+                        pizza.Count.ToString()},
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });
