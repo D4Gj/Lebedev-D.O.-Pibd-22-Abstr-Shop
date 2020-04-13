@@ -201,6 +201,12 @@
     <Compile Include="FormAmountPizza.Designer.cs">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportOrders.Designer.cs">
+      <DependentUpon>FormReportOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +255,9 @@
     <EmbeddedResource Include="FormAmountPizza.resx">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportOrders.resx">
+      <DependentUpon>FormReportOrders.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormComponent.resx">
       <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>
@@ -279,7 +288,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportOrders.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\FormAmountIngridients.datasource" />
+    <None Include="Properties\DataSources\FormAmountPizza.datasource" />
+    <None Include="Properties\DataSources\FormCreateOrder.datasource" />
+    <None Include="Properties\DataSources\FormMain.datasource" />
+    <None Include="Properties\DataSources\FormNameIngridient.datasource" />
+    <None Include="Properties\DataSources\FormPizza.datasource" />
+    <None Include="Properties\DataSources\FormProductComponent.datasource" />
+    <None Include="Properties\DataSources\PizzaAbstractShopView.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\PizzaAbstractShopView.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.IngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.OrderViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductComponentViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

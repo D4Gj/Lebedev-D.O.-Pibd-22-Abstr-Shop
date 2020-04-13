@@ -15,30 +15,30 @@ namespace PizzaShopBusinessLogic.BusinessLogic
         private readonly IPizzaShopLogic pizzaShopLogic;
         private readonly IOrderLogic orderLogic;
         public ReportLogic(IPizzaShopLogic pizzaShopLogic, IIngridientLogic ingridientLogic,
-       IOrderLogic orderLLogic)
+       IOrderLogic orderLogic)
         {
             this.pizzaShopLogic = pizzaShopLogic;
             this.ingridientLogic = ingridientLogic;
-            this.orderLogic = orderLLogic;
+            this.orderLogic = orderLogic;
         }
         public List<ReportPizzaIngridientViewModel> GetProductComponent()
         {
             var components = ingridientLogic.Read(null);
             var products = pizzaShopLogic.Read(null);
             var list = new List<ReportPizzaIngridientViewModel>();
-            foreach (var component in components)
+            foreach (var product in products)
             {
                 var record = new ReportPizzaIngridientViewModel
                 {
-                    IngridientName = component.IngridientName,
+                    PizzaName = product.PizzaName,
                     Pizzas = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var product in products)
+                foreach (var component in components)
                 {
                     if (product.PizzaIngridients.ContainsKey(component.Id))
                     {
-                        record.Pizzas.Add(new Tuple<string, int>(product.PizzaName,
+                        record.Pizzas.Add(new Tuple<string, int>(component.IngridientName,
                        product.PizzaIngridients[component.Id].Item2));
                         record.TotalCount +=
                        product.PizzaIngridients[component.Id].Item2;
@@ -48,11 +48,8 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             }
             return list;
         }
-        /// <summary>
-        /// Получение списка заказов за определенный период
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
+                
         public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
         {
             return orderLogic.Read(new OrderBindingModel
@@ -70,36 +67,28 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             })
            .ToList();
         }
-        /// <summary>
-        /// Сохранение компонент в файл-Word
-        /// </summary>
-        /// <param name="model"></param>
+
         public void SaveComponentsToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
-                Ingridients = ingridientLogic.Read(null)
+                Title = "Список пицц",
+                Pizzas = pizzaShopLogic.Read(null),
+
             });
         }
-        /// <summary>
-        /// Сохранение компонент с указаеним продуктов в файл-Excel
-        /// </summary>
-        /// <param name="model"></param>
+
         public void SaveProductComponentToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
-                PizzaIngridients = GetProductComponent()
+                Title = "Список пицц",
+                Pizzas = pizzaShopLogic.Read(null)
             });
         }
-        /// <summary>
-        /// Сохранение заказов в файл-Pdf
-        /// </summary>
-        /// <param name="model"></param>
+
         public void SaveOrdersToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo

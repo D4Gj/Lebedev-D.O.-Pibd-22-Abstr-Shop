@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
-using MigraDoc.Rendering;using PizzaShopBusinessLogic.HelperModels;
+using MigraDoc.Rendering;
+using PizzaShopBusinessLogic.HelperModels;
 
 namespace PizzaShopBusinessLogic.BusinessLogic
 {
@@ -95,4 +96,5 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             cellParameters.Cell.VerticalAlignment = VerticalAlignment.Center;
         }
     }
-}
+}
+

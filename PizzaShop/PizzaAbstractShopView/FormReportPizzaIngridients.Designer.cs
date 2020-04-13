@@ -30,15 +30,27 @@
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonSaveToExcel = new System.Windows.Forms.Button();
+            this.ColumnIngridient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPizza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnIngridient,
+            this.ColumnPizza,
+            this.ColumnCount});
             this.dataGridView.Location = new System.Drawing.Point(1, 29);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(543, 480);
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.Size = new System.Drawing.Size(538, 480);
             this.dataGridView.TabIndex = 0;
             // 
             // buttonSaveToExcel
@@ -50,6 +62,26 @@
             this.buttonSaveToExcel.Text = "Сохранить в Excel";
             this.buttonSaveToExcel.UseVisualStyleBackColor = true;
             this.buttonSaveToExcel.Click += new System.EventHandler(this.buttonSaveToExcel_Click);
+            // 
+            // ColumnIngridient
+            // 
+            this.ColumnIngridient.HeaderText = "Ингридиент";
+            this.ColumnIngridient.Name = "ColumnIngridient";
+            this.ColumnIngridient.ReadOnly = true;
+            this.ColumnIngridient.Width = 200;
+            // 
+            // ColumnPizza
+            // 
+            this.ColumnPizza.HeaderText = "Пицца";
+            this.ColumnPizza.Name = "ColumnPizza";
+            this.ColumnPizza.ReadOnly = true;
+            this.ColumnPizza.Width = 150;
+            // 
+            // ColumnCount
+            // 
+            this.ColumnCount.HeaderText = "Количество";
+            this.ColumnCount.Name = "ColumnCount";
+            this.ColumnCount.ReadOnly = true;
             // 
             // FormReportPizzaIngridients
             // 
@@ -70,5 +102,8 @@
 
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonSaveToExcel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIngridient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPizza;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCount;
     }
 }

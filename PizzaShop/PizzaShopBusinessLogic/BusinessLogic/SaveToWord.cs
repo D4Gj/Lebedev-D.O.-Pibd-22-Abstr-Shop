@@ -24,22 +24,23 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     TextProperties = new WordParagraphProperties
                     {
                         Bold = true,
-                        Size = "24",
+                        Size = "30",
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-                foreach (var component in info.Ingridients)
+                foreach (var pizza in info.Pizzas)
                 {
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<string> { component.IngridientName },
+                        Texts = new List<string> { pizza.PizzaName," - " + pizza.Price },
                         TextProperties = new WordParagraphProperties
                         {
+                            Bold = true,
                             Size = "24",
-                            JustificationValues = JustificationValues.Both
+                            JustificationValues = JustificationValues.Left
                         }
-                    }));
-                }
+                    }));                   
+                }               
                 docBody.AppendChild(CreateSectionProperties());
                 wordDocument.MainDocumentPart.Document.Save();
             }
@@ -69,10 +70,9 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     RunProperties properties = new RunProperties();
                     properties.AppendChild(new FontSize
                     {
-                        Val =
-                   paragraph.TextProperties.Size
+                        Val = paragraph.TextProperties.Size
                     });
-                    if (paragraph.TextProperties.Bold)
+                    if (!run.StartsWith(" - ") && paragraph.TextProperties.Bold)
                     {
                         properties.AppendChild(new Bold());
                     }
@@ -80,8 +80,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     docRun.AppendChild(new Text
                     {
                         Text = run,
-                        Space =
-                   SpaceProcessingModeValues.Preserve
+                        Space = SpaceProcessingModeValues.Preserve
                     });
                     docParagraph.AppendChild(docRun);
                 }

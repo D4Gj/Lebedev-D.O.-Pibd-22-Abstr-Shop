@@ -2,7 +2,8 @@
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;using System.Linq;
+using DocumentFormat.OpenXml.Spreadsheet;
+using System.Linq;
 using PizzaShopBusinessLogic.HelperModels;
 
 namespace PizzaShopBusinessLogic.BusinessLogic
@@ -59,7 +60,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     CellToName = "C1"
                 });
                 uint rowIndex = 2;
-                foreach (var pc in info.PizzaIngridients)
+                foreach (var pc in info.Pizzas)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
@@ -67,11 +68,12 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = pc.IngridientName,
+                        Text = pc.PizzaName,
                         StyleIndex = 0U
                     });
                     rowIndex++;
-                    foreach (var product in pc.Pizzas)
+                    decimal totalPrice = 0;
+                    foreach (var product in pc.PizzaIngridients)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
@@ -79,7 +81,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                             ShareStringPart = shareStringPart,
                             ColumnName = "B",
                             RowIndex = rowIndex,
-                            Text = product.Item1,
+                            Text = product.Value.Item1,
                             StyleIndex = 1U
                         });
                         InsertCellInWorksheet(new ExcelCellParameters
@@ -88,9 +90,10 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                             ShareStringPart = shareStringPart,
                             ColumnName = "C",
                             RowIndex = rowIndex,
-                            Text = product.Item2.ToString(),
+                            Text = product.Value.Item2.ToString(),
                             StyleIndex = 1U
                         });
+                        totalPrice += product.Value.Item2;
                         rowIndex++;
                     }
                     InsertCellInWorksheet(new ExcelCellParameters
@@ -99,8 +102,8 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                         ShareStringPart = shareStringPart,
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = pc.TotalCount.ToString(),
-                        StyleIndex = 0U
+                        Text = totalPrice.ToString(),
+                        StyleIndex = 1U
                     });
                     rowIndex++;
                 }
