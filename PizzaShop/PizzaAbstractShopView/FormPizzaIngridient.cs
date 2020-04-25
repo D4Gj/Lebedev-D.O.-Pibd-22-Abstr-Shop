@@ -14,7 +14,7 @@ using PizzaShopBusinessLogic.ViewModels;
 
 namespace PizzaAbstractShopView
 {
-    public partial class FormProductComponent : Form
+    public partial class FormPizzaIngridient : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
@@ -32,7 +32,7 @@ namespace PizzaAbstractShopView
                 textBoxCount.Text = value.ToString();
             }
         }
-        public FormProductComponent(IIngridientLogic logic)
+        public FormPizzaIngridient(IIngridientLogic logic)
         {
             InitializeComponent();
             List<IngridientViewModel> list = logic.Read(null);
@@ -41,7 +41,7 @@ namespace PizzaAbstractShopView
                 comboBoxIngridient.DisplayMember = "IngridientName";
                 comboBoxIngridient.ValueMember = "Id";
                 comboBoxIngridient.DataSource = list;
-                //comboBoxIngridient.SelectedItem = null;
+                comboBoxIngridient.SelectedItem = null;
             }
         }
 

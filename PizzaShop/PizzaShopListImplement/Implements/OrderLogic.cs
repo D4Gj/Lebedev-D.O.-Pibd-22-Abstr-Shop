@@ -25,8 +25,7 @@ namespace PizzaShopListImplement.Implements
             };
             foreach (var order in source.Orders)
             {
-                if (order.DateCreate == model.DateCreate && order.Count == model.Count && order.PizzaId == model.PizzaId
-                    && order.Sum == model.Sum && order.Status == model.Status && order.Id != model.Id)
+                if (order.DateCreate == model.DateCreate)
                 {
                     throw new Exception("Уже есть такой заказ");
                 }
