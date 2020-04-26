@@ -201,17 +201,23 @@
     <Compile Include="FormAmountPizza.Designer.cs">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormIngridient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIngridient.Designer.cs">
+      <DependentUpon>FormIngridient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPizzaIngridient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPizzaIngridient.Designer.cs">
+      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportOrders.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormReportOrders.Designer.cs">
       <DependentUpon>FormReportOrders.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormComponent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormComponent.Designer.cs">
-      <DependentUpon>FormComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAmountIngridients.cs">
       <SubType>Form</SubType>
@@ -237,12 +243,6 @@
     <Compile Include="FormPizza.Designer.cs">
       <DependentUpon>FormPizza.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProductComponent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormProductComponent.Designer.cs">
-      <DependentUpon>FormProductComponent.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormReportPizzaIngridients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,11 +255,14 @@
     <EmbeddedResource Include="FormAmountPizza.resx">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormIngridient.resx">
+      <DependentUpon>FormIngridient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPizzaIngridient.resx">
+      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReportOrders.resx">
       <DependentUpon>FormReportOrders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormComponent.resx">
-      <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAmountIngridients.resx">
       <DependentUpon>FormAmountIngridients.cs</DependentUpon>
@@ -272,9 +275,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPizza.resx">
       <DependentUpon>FormPizza.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormProductComponent.resx">
-      <DependentUpon>FormProductComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportPizzaIngridients.resx">
       <DependentUpon>FormReportPizzaIngridients.cs</DependentUpon>
