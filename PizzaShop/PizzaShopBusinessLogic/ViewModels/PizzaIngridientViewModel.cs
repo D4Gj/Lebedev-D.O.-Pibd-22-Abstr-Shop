@@ -24,3 +24,4 @@ namespace PizzaShopBusinessLogic.ViewModels
         public int Count { get; set; }
     }
 }
+

@@ -16,7 +16,7 @@ namespace PizzaShopFileImplement.Implements
         {
             source = FileDataListSingleton.GetInstance();
         }
-        public void CreateOrUpdate(ProductBindingModel model)
+        public void CreateOrUpdate(PizzaBindingModel model)
         {
             Pizza element = source.Pizza.FirstOrDefault(rec => rec.PizzaName ==
            model.PizzaName && rec.Id != model.Id);
@@ -67,7 +67,7 @@ namespace PizzaShopFileImplement.Implements
                 });
             }
         }
-        public void Delete(ProductBindingModel model)
+        public void Delete(PizzaBindingModel model)
         {
             // удаяем записи по компонентам при удалении изделия
             source.PizzaIngridients.RemoveAll(rec => rec.PizzaId == model.Id);
@@ -81,11 +81,11 @@ namespace PizzaShopFileImplement.Implements
                 throw new Exception("Элемент не найден");
             }
         }
-        public List<ProductViewModel> Read(ProductBindingModel model)
+        public List<PizzaViewModel> Read(PizzaBindingModel model)
         {
             return source.Pizza
             .Where(rec => model == null || rec.Id == model.Id)
-            .Select(rec => new ProductViewModel
+            .Select(rec => new PizzaViewModel
             {
                 Id = rec.Id,
                 PizzaName = rec.PizzaName,
