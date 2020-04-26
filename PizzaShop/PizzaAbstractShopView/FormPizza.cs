@@ -25,12 +25,7 @@ namespace PizzaAbstractShopView
         private Dictionary<int, (string, int)> pizzaIngr;
         public FormPizza(IPizzaShopLogic service)
         {
-            InitializeComponent();
-            dataGridView.Columns.Add("Id", "Id");
-            dataGridView.Columns.Add("IngridientName", "Ингридиент");
-            dataGridView.Columns.Add("Count", "Количество");
-            dataGridView.Columns[0].Visible = false;
-            dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            InitializeComponent();            
             this.logic = service;
         }
         private void FormPizza_Load(object sender, EventArgs e)
@@ -69,10 +64,13 @@ namespace PizzaAbstractShopView
                 if (pizzaIngr != null)
                 {
                     dataGridView.Rows.Clear();
-                    foreach (var pc in pizzaIngr)
+                    foreach(var pc in pizzaIngr)
                     {
-                        dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
-                    }
+                        dataGridView.Rows.Add(new object[]
+                        {
+                            pc.Key,pc.Value.Item1,pc.Value.Item2
+                        });
+                    }                    
                 }
             }
             catch (Exception ex)
@@ -124,8 +122,7 @@ namespace PizzaAbstractShopView
                 {
                     try
                     {
-
-                        pizzaIngr.Remove(dataGridView.SelectedRows[0].Cells[0].RowIndex);
+                        pizzaIngr.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].RowIndex));
                     }
                     catch (Exception ex)
                     {

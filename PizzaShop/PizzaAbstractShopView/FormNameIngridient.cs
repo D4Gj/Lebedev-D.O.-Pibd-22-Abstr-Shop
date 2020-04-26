@@ -76,6 +76,6 @@ namespace PizzaAbstractShopView
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
+        }     
     }
 }

@@ -8,8 +8,16 @@ namespace PizzaShopBusinessLogic.Interfaces
 {
     public interface IStorageLogic
     {
-        List<StorageViewModel> Read(StorageBindingModel model);
-        void CreateOrUpdate(StorageBindingModel model);
-        void Delete(StorageBindingModel model);
+        List<StorageViewModel> GetList();
+
+        StorageViewModel GetElement(int id);
+
+        void AddElement(StorageBindingModel model);
+
+        void UpdElement(StorageBindingModel model);
+
+        void DelElement(int id);
+
+        void AddComponent(StorageIngridientBindingModel model);
     }
 }

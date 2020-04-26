@@ -17,150 +17,204 @@ namespace PizzaShopListImplement.Implements
             source = DataListSingleton.GetInstance();
         }
 
-        public void CreateOrUpdate(StorageBindingModel storage)
+        public List<StorageViewModel> GetList()
         {
-            Storage tempStorage = storage.Id.HasValue ? null : new Storage
+            List<StorageViewModel> result = new List<StorageViewModel>();
+
+            for (int i = 0; i < source.Storages.Count; ++i)
             {
-                Id = 1
-            };
-            foreach (var s in source.Storages)
+                List<StorageIngridientViewModel> storageIngridients = new List<StorageIngridientViewModel>();
+
+                for (int j = 0; j < source.StorageIngridients.Count; ++j)
+                {
+                    if (source.StorageIngridients[j].StorageId == source.Storages[i].Id)
+                    {
+                        string ingridientName = string.Empty;
+
+                        for (int k = 0; k < source.Ingridients.Count; ++k)
+                        {
+                            if (source.StorageIngridients[j].IngridientId == source.Ingridients[k].Id)
+                            {
+                                ingridientName = source.Ingridients[k].IngridientName;
+                                break;
+                            }
+                        }
+
+                        storageIngridients.Add(new StorageIngridientViewModel
+                        {
+                            Id = source.StorageIngridients[j].Id,
+                            StorageId = source.StorageIngridients[j].StorageId,
+                            IngridientId = source.StorageIngridients[j].IngridientId,
+                            IngridientName = ingridientName,
+                            Count = source.StorageIngridients[j].Count
+                        });
+                    }
+                }
+
+                result.Add(new StorageViewModel
+                {
+                    Id = source.Storages[i].Id,
+                    StorageName = source.Storages[i].StorageName,
+                    StorageIngridients = storageIngridients
+                });
+            }
+
+            return result;
+        }
+
+        public StorageViewModel GetElement(int id)
+        {
+            for (int i = 0; i < source.Storages.Count; ++i)
             {
-                if (s.StorageName == storage.StorageName && s.Id != storage.Id)
+                List<StorageIngridientViewModel> storageIngridients = new List<StorageIngridientViewModel>();
+
+                for (int j = 0; j < source.StorageIngridients.Count; ++j)
+                {
+                    if (source.StorageIngridients[j].StorageId == source.Storages[i].Id)
+                    {
+                        string ingridientName = string.Empty;
+
+                        for (int k = 0; k < source.Ingridients.Count; ++k)
+                        {
+                            if (source.StorageIngridients[j].IngridientId == source.Ingridients[k].Id)
+                            {
+                                ingridientName = source.Ingridients[k].IngridientName;
+                                break;
+                            }
+                        }
+
+                        storageIngridients.Add(new StorageIngridientViewModel
+                        {
+                            Id = source.StorageIngridients[j].Id,
+                            StorageId = source.StorageIngridients[j].StorageId,
+                            IngridientId = source.StorageIngridients[j].IngridientId,
+                            IngridientName = ingridientName,
+                            Count = source.StorageIngridients[j].Count
+                        });
+                    }
+                }
+
+                if (source.Storages[i].Id == id)
+                {
+                    return new StorageViewModel
+                    {
+                        Id = source.Storages[i].Id,
+                        StorageName = source.Storages[i].StorageName,
+                        StorageIngridients = storageIngridients
+                    };
+                }
+            }
+
+            throw new Exception("Элемент не найден");
+        }
+
+        public void AddElement(StorageBindingModel model)
+        {
+            int maxId = 0;
+
+            for (int i = 0; i < source.Storages.Count; ++i)
+            {
+                if (source.Storages[i].Id > maxId)
+                {
+                    maxId = source.Storages[i].Id;
+                }
+
+                if (source.Storages[i].StorageName == model.StorageName)
                 {
                     throw new Exception("Уже есть склад с таким названием");
                 }
-                if (!storage.Id.HasValue && s.Id >= tempStorage.Id)
-                {
-                    tempStorage.Id = s.Id + 1;
-                }
-                else if (storage.Id.HasValue && s.Id == storage.Id)
-                {
-                    tempStorage = s;
-                }
             }
-            if (storage.Id.HasValue)
+
+            source.Storages.Add(new Storage
             {
-                if (tempStorage == null)
-                {
-                    throw new Exception("Элемент не найден");
-                }
-                CreateModel(storage, tempStorage);
-            }
-            else
-            {
-                source.Storages.Add(CreateModel(storage, tempStorage));
-            }
+                Id = maxId + 1,
+                StorageName = model.StorageName
+            });
         }
 
-        public void Delete(StorageBindingModel model)
+        public void UpdElement(StorageBindingModel model)
         {
-            // удаляем записи по компонентам при удалении хранилища
+            int index = -1;
+
+            for (int i = 0; i < source.Storages.Count; ++i)
+            {
+                if (source.Storages[i].Id == model.Id)
+                {
+                    index = i;
+                }
+
+                if (source.Storages[i].StorageName == model.StorageName && source.Storages[i].Id != model.Id)
+                {
+                    throw new Exception("Уже есть склад с таким названием");
+                }
+            }
+
+            if (index == -1)
+            {
+                throw new Exception("Элемент не найден");
+            }
+
+            source.Storages[index].StorageName = model.StorageName;
+        }
+
+        public void DelElement(int id)
+        {
             for (int i = 0; i < source.StorageIngridients.Count; ++i)
             {
-                if (source.StorageIngridients[i].StorageId == model.Id)
+                if (source.StorageIngridients[i].StorageId == id)
                 {
                     source.StorageIngridients.RemoveAt(i--);
                 }
             }
+
             for (int i = 0; i < source.Storages.Count; ++i)
             {
-                if (source.Storages[i].Id == model.Id)
+                if (source.Storages[i].Id == id)
                 {
                     source.Storages.RemoveAt(i);
                     return;
                 }
             }
+
             throw new Exception("Элемент не найден");
         }
 
-        public List<StorageViewModel> Read(StorageBindingModel model)
+        public void AddComponent(StorageIngridientBindingModel model)
         {
-            List<StorageViewModel> result = new List<StorageViewModel>();
-            foreach (var storage in source.Storages)
-            {
-                if (model != null)
-                {
-                    if (storage.Id == model.Id)
-                    {
-                        result.Add(CreateViewModel(storage));
-                        break;
-                    }
-                    continue;
-                }
-                result.Add(CreateViewModel(storage));
-            }
-            return result;
-        }
-
-        private Storage CreateModel(StorageBindingModel model, Storage storage)
-        {
-            storage.StorageName = model.StorageName;
-            //обновляем существуюущие компоненты и ищем максимальный идентификатор
-            int maxSMId = 0;
+            int findItemIndex = -1;
             for (int i = 0; i < source.StorageIngridients.Count; ++i)
             {
-                if (source.StorageIngridients[i].Id > maxSMId)
+                if (source.StorageIngridients[i].IngridientId == model.IngridientId
+                    && source.StorageIngridients[i].StorageId == model.StorageId)
                 {
-                    maxSMId = source.StorageIngridients[i].Id;
-                }
-                if (source.StorageIngridients[i].StorageId == storage.Id)
-                {
-                    // если в модели пришла запись компонента с таким id
-                    if (model.StoragedMaterials.ContainsKey(source.StorageIngridients[i].MaterialId))
-                    {
-                        // обновляем количество
-                        source.StorageIngridients[i].Count = model.StoragedMaterials[source.StorageMaterials[i].MaterialId].Item2;
-                        // из модели убираем эту запись, чтобы остались только не
-                        //просмотренные
-                        model.StoragedMaterials.Remove(source.StorageIngridients[i].MaterialId);
-                    }
-                    else
-                    {
-                        source.StorageIngridients.RemoveAt(i--);
-                    }
+                    findItemIndex = i;
+                    break;
                 }
             }
-            // новые записи
-            foreach (var sm in model.StoragedMaterials)
+            if (findItemIndex != -1)
             {
+                source.StorageIngridients[findItemIndex].Count =
+                    source.StorageIngridients[findItemIndex].Count + model.Count;
+            }
+            else
+            {
+                int maxId = 0;
+                for (int i = 0; i < source.StorageIngridients.Count; ++i)
+                {
+                    if (source.StorageIngridients[i].Id > maxId)
+                    {
+                        maxId = source.StorageIngridients[i].Id;
+                    }
+                }
                 source.StorageIngridients.Add(new StorageIngridient
                 {
-                    Id = ++maxSMId,
-                    StorageId = storage.Id,
-                    MaterialId = sm.Key,
-                    Count = sm.Value.Item2
+                    Id = maxId + 1,
+                    StorageId = model.StorageId,
+                    IngridientId = model.IngridientId,
+                    Count = model.Count
                 });
             }
-            return storage;
-        }
-
-        private StorageViewModel CreateViewModel(Storage storage)
-        {
-            // требуется дополнительно получить список компонентов для хранилища с
-            // названиями и их количество
-            Dictionary<int, (string, int)> storageMaterials = new Dictionary<int, (string, int)>();
-            foreach (var sm in source.StorageIngridients)
-            {
-                if (sm.StorageId == storage.Id)
-                {
-                    string componentName = string.Empty;
-                    foreach (var component in source.Ingridients)
-                    {
-                        if (sm.MaterialId == component.Id)
-                        {
-                            componentName = component.MaterialName;
-                            break;
-                        }
-                    }
-                    storageMaterials.Add(sm.MaterialId, (componentName, sm.Count));
-                }
-            }
-            return new StorageViewModel
-            {
-                Id = storage.Id,
-                StorageName = storage.StorageName,
-                StoragedMaterials = storageMaterials
-            };
         }
     }
 }
+

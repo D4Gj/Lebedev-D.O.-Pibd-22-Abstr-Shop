@@ -79,12 +79,6 @@
     <Compile Include="FormCreateOrder.Designer.cs">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDisplayIngridients.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormDisplayIngridients.Designer.cs">
-      <DependentUpon>FormDisplayIngridients.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,11 +97,23 @@
     <Compile Include="FormPizzaIngridient.Designer.cs">
       <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormStorageIngridients.cs">
+    <Compile Include="FormReplenishStorage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormStorageIngridients.Designer.cs">
-      <DependentUpon>FormStorageIngridients.cs</DependentUpon>
+    <Compile Include="FormReplenishStorage.Designer.cs">
+      <DependentUpon>FormReplenishStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStorage.Designer.cs">
+      <DependentUpon>FormStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStorages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStorages.Designer.cs">
+      <DependentUpon>FormStorages.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,9 +129,6 @@
     <EmbeddedResource Include="FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDisplayIngridients.resx">
-      <DependentUpon>FormDisplayIngridients.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,8 +138,14 @@
     <EmbeddedResource Include="FormPizzaIngridient.resx">
       <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormStorageIngridients.resx">
-      <DependentUpon>FormStorageIngridients.cs</DependentUpon>
+    <EmbeddedResource Include="FormReplenishStorage.resx">
+      <DependentUpon>FormReplenishStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStorage.resx">
+      <DependentUpon>FormStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStorages.resx">
+      <DependentUpon>FormStorages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

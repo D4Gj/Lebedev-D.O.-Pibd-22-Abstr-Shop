@@ -8,7 +8,6 @@ namespace PizzaShopBusinessLogic.BindingModels
     {
         public int? Id { set; get; }
         public string StorageName { set; get; }
-        //materialId , (name, count)
-        public Dictionary<int, (string, int)> StoragedMaterials { get; set; }
+        public List<StorageIngridientBindingModel> StorageIngridients { get; set; }
     }
 }

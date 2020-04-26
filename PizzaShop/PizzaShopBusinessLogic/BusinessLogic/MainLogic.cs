@@ -12,11 +12,11 @@ namespace PizzaShopBusinessLogic.BusinessLogic
     {
         private readonly IOrderLogic orderLogic;
         private readonly IStorageLogic storageLogic;
-        private readonly IIngridientLogic ingridientLogic;
         
-        public MainLogic(IOrderLogic orderLogic)
+        public MainLogic(IOrderLogic orderLogic, IStorageLogic storageLogic)
         {
             this.orderLogic = orderLogic;
+            this.storageLogic = storageLogic;
         }
         public void CreateOrder(CreateOrderBindingModel model)
         {
@@ -98,19 +98,9 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                 Status = OrderStatus.Готов
             });
         }
-        public void AddMaterials(StorageViewModel storage, int count, IngridientViewModel material)
+        public void ReplenishStorage(StorageIngridientBindingModel model)
         {
-            if (storage.StoragedMaterials.ContainsKey(material.Id))
-                storage.StoragedMaterials[material.Id] =
-                    (storage.StoragedMaterials[material.Id].Item1, storage.StoragedMaterials[material.Id].Item2 + count);
-            else
-                storage.StoragedMaterials.Add(material.Id, (material.IngridientName, count));
-            storageLogic.CreateOrUpdate(new StorageBindingModel()
-            {
-                Id = storage.Id,
-                StorageName = storage.StorageName,
-                StoragedMaterials = storage.StoragedMaterials
-            });
+            storageLogic.AddComponent(model);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace PizzaShopListImplement.Implements
         {
             source = DataListSingleton.GetInstance();
         }
+        
         public void CreateOrUpdate(IngridientBindingModel model)
         {
             Ingridient tempComponent = model.Id.HasValue ? null : new Ingridient

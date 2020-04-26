@@ -15,6 +15,24 @@ namespace PizzaShopListImplement.Implements
         {
             source = DataListSingleton.GetInstance();
         }
+        public List<PizzaViewModel> Read(PizzaBindingModel model)
+        {
+            List<PizzaViewModel> result = new List<PizzaViewModel>();
+            foreach (var ingridient in source.Pizzas)
+            {
+                if (model != null)
+                {
+                    if (ingridient.Id == model.Id)
+                    {
+                        result.Add(CreateViewModel(ingridient));
+                        break;
+                    }
+                    continue;
+                }
+                result.Add(CreateViewModel(ingridient));
+            }
+            return result;
+        }
         public void CreateOrUpdate(PizzaBindingModel model)
         {
             Pizza tempProduct = model.Id.HasValue ? null : new Pizza { Id = 1 };
@@ -43,17 +61,16 @@ namespace PizzaShopListImplement.Implements
             }
             else
             {
-                source.Pizzas.Add(CreateModel(model, tempProduct));
+                source.Pizzas.Add(CreateModel(model,tempProduct));
             }
         }
         public void Delete(PizzaBindingModel model)
-        {
-            // удаляем записи по компонентам при удалении изделия
-            for (int i = 0; i < source.PizzaIngredients.Count; ++i)
+        {            
+            for (int i = 0; i < source.PizzaIngridients.Count; ++i)
             {
-                if (source.PizzaIngredients[i].PizzaId == model.Id)
+                if (source.PizzaIngridients[i].PizzaId == model.Id)
                 {
-                    source.PizzaIngredients.RemoveAt(i--);
+                    source.PizzaIngridients.RemoveAt(i--);
                 }
             }
             for (int i = 0; i < source.Pizzas.Count; ++i)
@@ -65,95 +82,72 @@ namespace PizzaShopListImplement.Implements
                 }
             }
             throw new Exception("Элемент не найден");
-        }
-        private Pizza CreateModel(PizzaBindingModel model, Pizza product)
+        }       
+        private Pizza CreateModel(PizzaBindingModel model, Pizza Pizza)
         {
-            product.PizzaName = model.PizzaName;
-            product.Price = model.Price;
-            //обновляем существуюущие компоненты и ищем максимальный идентификатор
+            Pizza.PizzaName = model.PizzaName;
+            Pizza.Price = model.Price;           
             int maxPCId = 0;
-            for (int i = 0; i < source.PizzaIngredients.Count; ++i)
+            for (int i = 0; i < source.PizzaIngridients.Count; ++i)
             {
-                if (source.PizzaIngredients[i].Id > maxPCId)
+                if (source.PizzaIngridients[i].Id > maxPCId)
                 {
-                    maxPCId = source.PizzaIngredients[i].Id;
+                    maxPCId = source.PizzaIngridients[i].Id;
                 }
-                if (source.PizzaIngredients[i].PizzaId == product.Id)
+                if (source.PizzaIngridients[i].PizzaId == Pizza.Id)
                 {
-                    // если в модели пришла запись компонента с таким id
+                    
                     if
-                    (model.PizzaIngridients.ContainsKey(source.PizzaIngredients[i].IngridientID))
+                    (model.PizzaIngridients.ContainsKey(source.PizzaIngridients[i].IngridientID))
                     {
-                        // обновляем количество
-                        source.PizzaIngredients[i].Count =
-                        model.PizzaIngridients[source.PizzaIngredients[i].IngridientID].Item2;
-                        // из модели убираем эту запись, чтобы остались только не просмотренные
-
-                        model.PizzaIngridients.Remove(source.PizzaIngredients[i].IngridientID);
+                       
+                        source.PizzaIngridients[i].Count =
+                        model.PizzaIngridients[source.PizzaIngridients[i].IngridientID].Item2;
+                        model.PizzaIngridients.Remove(source.PizzaIngridients[i].IngridientID);
                     }
                     else
                     {
-                        source.PizzaIngredients.RemoveAt(i--);
+                        source.PizzaIngridients.RemoveAt(i--);
                     }
                 }
             }
-            // новые записи
+           
             foreach (var pc in model.PizzaIngridients)
             {
-                source.PizzaIngredients.Add(new PizzaIngredient
+                source.PizzaIngridients.Add(new PizzaIngridient
                 {
                     Id = ++maxPCId,
-                    PizzaId = product.Id,
+                    PizzaId = Pizza.Id,
                     IngridientID = pc.Key,
                     Count = pc.Value.Item2
                 });
             }
-            return product;
+            return Pizza;
         }
-        public List<PizzaViewModel> Read(PizzaBindingModel model)
-        {
-            List<PizzaViewModel> result = new List<PizzaViewModel>();
-            foreach (var component in source.Pizzas)
+        private PizzaViewModel CreateViewModel(Pizza Pizza)
+        {            
+            Dictionary<int, (string, int)> pizzaIngridients = new Dictionary<int,(string, int)>();
+            foreach (var pc in source.PizzaIngridients)
             {
-                if (model != null)
+                if (pc.PizzaId == Pizza.Id)
                 {
-                    if (component.Id == model.Id)
+                    string IngridientName = string.Empty;
+                    foreach (var Ingridient in source.Ingridients)
                     {
-                        result.Add(CreateViewModel(component));
-                        break;
-                    }
-                    continue;
-                }
-                result.Add(CreateViewModel(component));
-            }
-            return result;
-        }
-        private PizzaViewModel CreateViewModel(Pizza product)
-        {
-            // требуется дополнительно получить список компонентов для изделия с  названиями и их количество
-            Dictionary<int, (string, int)> pizzaIngridients = new Dictionary<int,
-    (string, int)>();
-            foreach (var pc in source.PizzaIngredients)
-            {
-                if (pc.PizzaId == product.Id)
-                {
-                    string componentName = string.Empty;
-                    foreach (var component in source.Ingridients)
-                    {
-                        if (pc.IngridientID == component.Id)
+                        if (pc.IngridientID == Ingridient.Id)
                         {
-                            componentName = component.IngridientName;
+                            IngridientName = Ingridient.IngridientName;
                             break;
                         }
                     }
-                    pizzaIngridients.Add(pc.IngridientID, (componentName, pc.Count));
+                    pizzaIngridients.Add(pc.IngridientID, (IngridientName, pc.Count));
                 }
             }
             return new PizzaViewModel
             {
-                Id = product.Id,
-                PizzaName = product.PizzaName,
-                Price = product.Price,
+                Id = Pizza.Id,
+                PizzaName = Pizza.PizzaName,
+                Price = Pizza.Price,
                 PizzaIngridients = pizzaIngridients
             };
         }

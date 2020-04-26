@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PizzaShopListImplement.Models
 {
-    public class PizzaIngredient
+    public class PizzaIngridient
     {
         public int Id { get; set; }
         public int PizzaId { get; set; }

@@ -10,6 +10,6 @@ namespace PizzaShopBusinessLogic.ViewModels
         public int Id { set; get; }
         [DisplayName("Хранилище")]
         public string StorageName { set; get; }
-        public Dictionary<int, (string, int)> StoragedMaterials { get; set; }
+        public List<StorageIngridientViewModel> StorageIngridients { get; set; }
     }
 }
