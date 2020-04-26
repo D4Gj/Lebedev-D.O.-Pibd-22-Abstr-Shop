@@ -153,12 +153,6 @@
     <Compile Include="FormAmountPizza.Designer.cs">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormComponent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormComponent.Designer.cs">
-      <DependentUpon>FormComponent.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormAmountIngridients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +171,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormNameIngridient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNameIngridient.Designer.cs">
+      <DependentUpon>FormNameIngridient.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPizza.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,9 +194,6 @@
     <EmbeddedResource Include="FormAmountPizza.resx">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormComponent.resx">
-      <DependentUpon>FormComponent.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormAmountIngridients.resx">
       <DependentUpon>FormAmountIngridients.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNameIngridient.resx">
+      <DependentUpon>FormNameIngridient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPizza.resx">
       <DependentUpon>FormPizza.cs</DependentUpon>
