@@ -8,10 +8,10 @@ using PizzaShopBusinessLogic.Interfaces;
 
 namespace PizzaShopListImplement.Implements
 {
-    public class ProductLogic : IPizzaShopLogic
+    public class PizzaLogic : IPizzaShopLogic
     {
         private readonly DataListSingleton source;
-        public ProductLogic()
+        public PizzaLogic()
         {
             source = DataListSingleton.GetInstance();
         }
