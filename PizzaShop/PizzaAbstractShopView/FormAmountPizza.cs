@@ -73,7 +73,7 @@ namespace PizzaAbstractShopView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new ProductBindingModel { Id = id });
+                        logic.Delete(new PizzaBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

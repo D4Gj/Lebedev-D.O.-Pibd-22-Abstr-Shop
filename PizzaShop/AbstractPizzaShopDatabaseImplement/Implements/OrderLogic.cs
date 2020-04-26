@@ -26,7 +26,6 @@ namespace PizzaShopDatabaseImplement.Implements
                     }
                     order.PizzaId = model.PizzaId;
                     order.Status = model.Status;
-                    order.PizzaId = model.PizzaId;
                     order.Count = model.Count;
                     order.Sum = model.Sum;
                     order.DateCreate = model.DateCreate;
@@ -37,7 +36,6 @@ namespace PizzaShopDatabaseImplement.Implements
                     order = new Order();
                     order.PizzaId = model.PizzaId;
                     order.Status = model.Status;
-                    order.PizzaId = model.PizzaId;
                     order.Count = model.Count;
                     order.Sum = model.Sum;
                     order.DateCreate = model.DateCreate;

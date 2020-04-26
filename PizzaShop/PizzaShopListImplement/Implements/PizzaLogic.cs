@@ -8,14 +8,14 @@ using PizzaShopBusinessLogic.Interfaces;
 
 namespace PizzaShopListImplement.Implements
 {
-    public class ProductLogic : IPizzaShopLogic
+    public class PizzaLogic : IPizzaShopLogic
     {
         private readonly DataListSingleton source;
-        public ProductLogic()
+        public PizzaLogic()
         {
             source = DataListSingleton.GetInstance();
         }
-        public void CreateOrUpdate(ProductBindingModel model)
+        public void CreateOrUpdate(PizzaBindingModel model)
         {
             Pizza tempProduct = model.Id.HasValue ? null : new Pizza { Id = 1 };
             foreach (var product in source.Pizzas)
@@ -46,7 +46,7 @@ namespace PizzaShopListImplement.Implements
                 source.Pizzas.Add(CreateModel(model, tempProduct));
             }
         }
-        public void Delete(ProductBindingModel model)
+        public void Delete(PizzaBindingModel model)
         {
             // удаляем записи по компонентам при удалении изделия
             for (int i = 0; i < source.PizzaIngredients.Count; ++i)
@@ -66,7 +66,7 @@ namespace PizzaShopListImplement.Implements
             }
             throw new Exception("Элемент не найден");
         }
-        private Pizza CreateModel(ProductBindingModel model, Pizza product)
+        private Pizza CreateModel(PizzaBindingModel model, Pizza product)
         {
             product.PizzaName = model.PizzaName;
             product.Price = model.Price;
@@ -110,9 +110,9 @@ namespace PizzaShopListImplement.Implements
             }
             return product;
         }
-        public List<ProductViewModel> Read(ProductBindingModel model)
+        public List<PizzaViewModel> Read(PizzaBindingModel model)
         {
-            List<ProductViewModel> result = new List<ProductViewModel>();
+            List<PizzaViewModel> result = new List<PizzaViewModel>();
             foreach (var component in source.Pizzas)
             {
                 if (model != null)
@@ -128,7 +128,7 @@ namespace PizzaShopListImplement.Implements
             }
             return result;
         }
-        private ProductViewModel CreateViewModel(Pizza product)
+        private PizzaViewModel CreateViewModel(Pizza product)
         {
             // требуется дополнительно получить список компонентов для изделия с  названиями и их количество
             Dictionary<int, (string, int)> pizzaIngridients = new Dictionary<int,
@@ -149,7 +149,7 @@ namespace PizzaShopListImplement.Implements
                     pizzaIngridients.Add(pc.IngridientID, (componentName, pc.Count));
                 }
             }
-            return new ProductViewModel
+            return new PizzaViewModel
             {
                 Id = product.Id,
                 PizzaName = product.PizzaName,

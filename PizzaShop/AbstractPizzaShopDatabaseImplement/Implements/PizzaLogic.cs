@@ -12,7 +12,7 @@ namespace PizzaShopDatabaseImplement.Implements
 {
     public class PizzaLogic : IPizzaShopLogic
     {
-        public void CreateOrUpdate(ProductBindingModel model)
+        public void CreateOrUpdate(PizzaBindingModel model)
         {
             using (var context = new PizzaShopDatabase())
             {
@@ -76,7 +76,7 @@ namespace PizzaShopDatabaseImplement.Implements
                 }
             }
         }
-        public void Delete(ProductBindingModel model)
+        public void Delete(PizzaBindingModel model)
         {
             using (var context = new PizzaShopDatabase())
             {
@@ -107,14 +107,14 @@ namespace PizzaShopDatabaseImplement.Implements
                 }
             }
         }
-        public List<ProductViewModel> Read(ProductBindingModel model)
+        public List<PizzaViewModel> Read(PizzaBindingModel model)
         {
             using (var context = new PizzaShopDatabase())
             {
                 return context.Pizzas
                 .Where(rec => model == null || rec.Id == model.Id)
                 .ToList()
-                .Select(rec => new ProductViewModel
+                .Select(rec => new PizzaViewModel
                 {
                     Id = rec.Id,
                     PizzaName = rec.PizzaName,
