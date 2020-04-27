@@ -89,6 +89,7 @@ namespace PizzaShopListImplement.Implements
             order.Count = model.Count;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             order.PizzaId = model.PizzaId;
             order.Status = model.Status;
             order.Sum = model.Sum;

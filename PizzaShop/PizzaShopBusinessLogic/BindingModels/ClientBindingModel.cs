@@ -9,15 +9,15 @@ namespace PizzaShopBusinessLogic.BindingModels
     public class ClientBindingModel
     {
         [DataMember]
-        public int? Id { get; set; }
+        public int? Id { set; get; }
 
         [DataMember]
-        public string FIO { get; set; }
+        public string FIO { set; get; }
 
         [DataMember]
-        public string Email { get; set; }
+        public string Login { set; get; }
 
         [DataMember]
-        public string Password { get; set; }
+        public string Password { set; get; }
     }
 }

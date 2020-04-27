@@ -27,5 +27,6 @@ namespace PizzaShopDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
 
         public Pizza Pizza { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

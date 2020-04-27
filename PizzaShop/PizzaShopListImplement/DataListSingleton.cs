@@ -10,13 +10,15 @@ namespace PizzaShopListImplement
         public List<Ingridient> Ingridients { get; set; }
         public List<Order> Orders { get; set; }
         public List<Pizza> Pizzas { get; set; }
-        public List<PizzaIngredient> PizzaIngredients { get; set; }
+        public List<PizzaIngridient> PizzaIngredients { get; set; }
+        public List<Client> Clients { get; set; }
         private DataListSingleton()
         {
             Ingridients = new List<Ingridient>();
             Orders = new List<Order>();
             Pizzas = new List<Pizza>();
-            PizzaIngredients = new List<PizzaIngredient>();
+            PizzaIngredients = new List<PizzaIngridient>();
+            Clients = new List<Client>();
         }
         public static DataListSingleton GetInstance()
         {

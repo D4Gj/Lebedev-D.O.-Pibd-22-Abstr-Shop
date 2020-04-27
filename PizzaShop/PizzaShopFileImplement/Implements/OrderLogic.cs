@@ -35,6 +35,7 @@ namespace PizzaShopFileImplement.Implements
                 source.Orders.Add(element);
             }
             element.Status = model.Status;
+            element.ClientId = model.ClientId.Value;
             element.PizzaId = model.PizzaId;
             element.Count = model.Count;
             element.Sum = model.Sum;
@@ -62,12 +63,14 @@ namespace PizzaShopFileImplement.Implements
             {
                 Id = rec.Id,
                 Count = rec.Count,
-                PizzaName = source.Pizza.Where(recPC => recPC.Id==rec.PizzaId)
+                PizzaName = source.Pizzas.Where(recPC => recPC.Id==rec.PizzaId)
                 .FirstOrDefault(recC => recC.Id==rec.PizzaId).PizzaName,
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement,
                 PizzaId = rec.PizzaId,
                 Status = rec.Status,
+                ClientId = rec.ClientId,
+                ClientFIO = rec.ClientFIO,
                 Sum = rec.Sum
             })
             .ToList();

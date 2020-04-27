@@ -18,7 +18,7 @@ namespace PizzaShopFileImplement.Implements
         }
         public void CreateOrUpdate(PizzaBindingModel model)
         {
-            Pizza element = source.Pizza.FirstOrDefault(rec => rec.PizzaName ==
+            Pizza element = source.Pizzas.FirstOrDefault(rec => rec.PizzaName ==
            model.PizzaName && rec.Id != model.Id);
             if (element != null)
             {
@@ -26,7 +26,7 @@ namespace PizzaShopFileImplement.Implements
             }
             if (model.Id.HasValue)
             {
-                element = source.Pizza.FirstOrDefault(rec => rec.Id == model.Id);
+                element = source.Pizzas.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -34,10 +34,10 @@ namespace PizzaShopFileImplement.Implements
             }
             else
             {
-                int maxId = source.Pizza.Count > 0 ? source.Ingridients.Max(rec =>
+                int maxId = source.Pizzas.Count > 0 ? source.Ingridients.Max(rec =>
                rec.Id) : 0;
                 element = new Pizza { Id = maxId + 1 };
-                source.Pizza.Add(element);
+                source.Pizzas.Add(element);
             }
             element.PizzaName = model.PizzaName;
             element.Price = model.Price;
@@ -71,10 +71,10 @@ namespace PizzaShopFileImplement.Implements
         {
             // удаяем записи по компонентам при удалении изделия
             source.PizzaIngridients.RemoveAll(rec => rec.PizzaId == model.Id);
-            Pizza element = source.Pizza.FirstOrDefault(rec => rec.Id == model.Id);
+            Pizza element = source.Pizzas.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
-                source.Pizza.Remove(element);
+                source.Pizzas.Remove(element);
             }
             else
             {
@@ -83,7 +83,7 @@ namespace PizzaShopFileImplement.Implements
         }
         public List<PizzaViewModel> Read(PizzaBindingModel model)
         {
-            return source.Pizza
+            return source.Pizzas
             .Where(rec => model == null || rec.Id == model.Id)
             .Select(rec => new PizzaViewModel
             {

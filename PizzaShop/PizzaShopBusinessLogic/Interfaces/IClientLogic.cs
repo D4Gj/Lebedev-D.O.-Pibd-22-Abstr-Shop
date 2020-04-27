@@ -6,7 +6,7 @@ namespace PizzaShopBusinessLogic.Interfaces
 {
     public interface IClientLogic
     {
-        List<ClientBindingModel> Read(ClientBindingModel model);
+        List<ClientViewModel> Read(ClientBindingModel model);
         void CreateOrUpdate(ClientBindingModel model);
         void Delete(ClientBindingModel model);
     }

@@ -13,6 +13,8 @@ namespace PizzaShopBusinessLogic.BindingModels
         [DataMember]
         public int ClientId { get; set; }
         [DataMember]
+        public string ClientFIO { set; get; }
+        [DataMember]
         public int Count { get; set; }
         [DataMember]
         public decimal Sum { get; set; }

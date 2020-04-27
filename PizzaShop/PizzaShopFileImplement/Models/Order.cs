@@ -14,5 +14,7 @@ namespace PizzaShopFileImplement.Models
         public OrderStatus Status { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
+        public int ClientId { set; get; }
+        public string ClientFIO { set; get; }
     }
 }

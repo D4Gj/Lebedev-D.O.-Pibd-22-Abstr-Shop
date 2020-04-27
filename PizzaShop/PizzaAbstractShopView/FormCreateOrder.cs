@@ -21,11 +21,13 @@ namespace PizzaAbstractShopView
         public new IUnityContainer Container { get; set; }
         private readonly IPizzaShopLogic logicP;
         private readonly MainLogic logicM;
-        public FormCreateOrder(IPizzaShopLogic logicP, MainLogic logicM)
+        private readonly IClientLogic logicC;
+        public FormCreateOrder(IPizzaShopLogic logicP, MainLogic logicM,IClientLogic logicC)
         {
             InitializeComponent();
             this.logicP = logicP;
             this.logicM = logicM;
+            this.logicC = logicC;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
@@ -39,6 +41,15 @@ namespace PizzaAbstractShopView
                     comboBoxProduct.ValueMember = "Id";
                     comboBoxProduct.DataSource = listP;
                     comboBoxProduct.SelectedItem = null;
+                }
+                var listC = logicC.Read(null);
+
+                if (listC != null)
+                {
+                    comboBoxClient.DisplayMember = "FIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listC;
+                    comboBoxClient.SelectedItem = null;
                 }
             }
             catch (Exception ex)
@@ -100,6 +111,7 @@ namespace PizzaAbstractShopView
                 logicM.CreateOrder(new CreateOrderBindingModel
                 {
                     PizzaId = Convert.ToInt32(comboBoxProduct.SelectedValue),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });
