@@ -17,6 +17,7 @@ namespace PizzaShopClientView
         static void Main()
         {
             APIClient.Connect();
+            Application.SetHigh
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

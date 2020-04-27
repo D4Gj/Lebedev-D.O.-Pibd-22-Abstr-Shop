@@ -33,7 +33,7 @@ namespace PizzaShopRestApi
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IPizzaShopLogic, PizzaLogic>();
             services.AddTransient<MainLogic>();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

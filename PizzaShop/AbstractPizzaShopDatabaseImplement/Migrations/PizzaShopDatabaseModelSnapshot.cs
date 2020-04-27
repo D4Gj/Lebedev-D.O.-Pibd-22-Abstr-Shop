@@ -71,7 +71,7 @@ namespace PizzaShopDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClientId")
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<int>("Count")
@@ -156,7 +156,9 @@ namespace PizzaShopDatabaseImplement.Migrations
                 {
                     b.HasOne("PizzaShopDatabaseImplement.Models.Client", "Client")
                         .WithMany("Orders")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PizzaShopDatabaseImplement.Models.Pizza", "Pizza")
                         .WithMany("Orders")

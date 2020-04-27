@@ -63,12 +63,12 @@ namespace PizzaShopDatabaseImplement.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PizzaId = table.Column<int>(nullable: false),
+                    ClientId = table.Column<int>(nullable: false),
                     Count = table.Column<int>(nullable: false),
                     Sum = table.Column<decimal>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     DateCreate = table.Column<DateTime>(nullable: false),
-                    DateImplement = table.Column<DateTime>(nullable: true),
-                    ClientId = table.Column<int>(nullable: true)
+                    DateImplement = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,7 +78,7 @@ namespace PizzaShopDatabaseImplement.Migrations
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Pizzas_PizzaId",
                         column: x => x.PizzaId,

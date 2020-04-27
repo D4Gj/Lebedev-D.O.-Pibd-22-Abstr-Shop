@@ -18,6 +18,6 @@ namespace PizzaShopDatabaseImplement.Models
         [Required]
         public string Password { get; set; }
 
-        public virtual List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }
