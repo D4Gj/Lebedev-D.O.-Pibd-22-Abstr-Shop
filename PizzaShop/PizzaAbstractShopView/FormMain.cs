@@ -127,5 +127,17 @@ namespace PizzaAbstractShopView
         {
             LoadData();
         }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormStorages>();
+            form.ShowDialog();
+        }
+
+        private void buttonReplenish_Click_1(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReplenishStorage>();
+            form.ShowDialog();
+        }
     }
 }

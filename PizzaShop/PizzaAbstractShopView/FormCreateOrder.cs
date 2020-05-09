@@ -30,16 +30,12 @@ namespace PizzaAbstractShopView
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
-            {
-                var listP = logicP.Read(null);
-
-                if (listP != null)
-                {
+            {           
+                    var listP = logicP.Read(null);
                     comboBoxProduct.DisplayMember = "PizzaName";
                     comboBoxProduct.ValueMember = "Id";
                     comboBoxProduct.DataSource = listP;
-                    comboBoxProduct.SelectedItem = null;
-                }
+                    comboBoxProduct.SelectedItem = null;                
             }
             catch (Exception ex)
             {
