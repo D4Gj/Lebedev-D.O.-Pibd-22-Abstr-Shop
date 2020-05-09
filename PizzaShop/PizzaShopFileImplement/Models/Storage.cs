@@ -4,7 +4,9 @@ using System.Text;
 
 namespace PizzaShopFileImplement.Models
 {
-    class StorageLogic
+    public class Storage
     {
+        public int Id { get; set; }
+        public string StorageName { get; set; }
     }
 }

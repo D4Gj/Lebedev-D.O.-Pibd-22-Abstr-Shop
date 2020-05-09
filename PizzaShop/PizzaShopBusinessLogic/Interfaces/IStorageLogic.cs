@@ -19,5 +19,9 @@ namespace PizzaShopBusinessLogic.Interfaces
         void DelElement(int id);
 
         void AddComponent(StorageIngridientBindingModel model);
+
+        bool IsIngridientAvailible(int pizzaId, int pizzasCount);
+        void RemoveFromStorage(int pizzaId, int pizzasCount);
+
     }
 }

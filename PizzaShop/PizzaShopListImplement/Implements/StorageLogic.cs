@@ -5,6 +5,7 @@ using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.Interfaces;
 using PizzaShopBusinessLogic.ViewModels;
 using PizzaShopListImplement.Models;
+using System.Linq;
 
 namespace PizzaShopListImplement.Implements
 {
@@ -214,6 +215,39 @@ namespace PizzaShopListImplement.Implements
                     Count = model.Count
                 });
             }
+        }
+        public bool IsIngridientAvailible(int pizzaId, int pizzasCount)
+        {
+            bool result = true;
+            var PizzaIngridients = source.PizzaIngridients.Where(x => x.PizzaId == pizzaId);
+            if (PizzaIngridients.Count() == 0) return false;
+            foreach (var elem in PizzaIngridients)
+            {
+                int count = 0;
+                var storageIngridients = source.StorageIngridients.FindAll(x => x.IngridientId == elem.IngridientID);
+                count = storageIngridients.Sum(x => x.Count);
+                if (count < elem.Count * pizzasCount)
+                    return false;
+            }
+            return result;
+        }
+        public void RemoveFromStorage(int pizzaId, int pizzasCount)
+        {
+            var PizzaIngridients = source.PizzaIngridients.Where(x => x.PizzaId == pizzaId);
+            if (PizzaIngridients.Count() == 0) return;
+            foreach (var elem in PizzaIngridients)
+            {
+                int left = elem.Count * pizzasCount;
+                var storageIngridients = source.StorageIngridients.FindAll(x => x.IngridientId == elem.IngridientID);
+                foreach (var rec in storageIngridients)
+                {
+                    int toRemove = left > rec.Count ? rec.Count : left;
+                    rec.Count -= toRemove;
+                    left -= toRemove;
+                    if (left == 0) break;
+                }
+            }
+            return;
         }
     }
 }
