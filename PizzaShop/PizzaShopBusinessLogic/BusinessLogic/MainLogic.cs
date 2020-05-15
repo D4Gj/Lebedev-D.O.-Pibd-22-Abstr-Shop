@@ -4,15 +4,19 @@ using System.Text;
 using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.Enums;
 using PizzaShopBusinessLogic.Interfaces;
+using PizzaShopBusinessLogic.ViewModels;
 
 namespace PizzaShopBusinessLogic.BusinessLogic
 {
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly IStorageLogic storageLogic;
+        
+        public MainLogic(IOrderLogic orderLogic, IStorageLogic storageLogic)
         {
             this.orderLogic = orderLogic;
+            this.storageLogic = storageLogic;
         }
         public void CreateOrder(CreateOrderBindingModel model)
         {
@@ -93,6 +97,10 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов
             });
+        }
+        public void ReplenishStorage(StorageIngridientBindingModel model)
+        {
+            storageLogic.AddComponent(model);
         }
     }
 }
