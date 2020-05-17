@@ -74,7 +74,7 @@ namespace PizzaShopFileImplement.Implements
         private string GetPizzaName(int id)
         {
             string name = "";
-            var product = source.Pizzas.FirstOrDefault(x => x.Id == id);
+            var pizza = source.Pizza.FirstOrDefault(x => x.Id == id);
 
             name = pizza != null ? pizza.PizzaName : "";
 
