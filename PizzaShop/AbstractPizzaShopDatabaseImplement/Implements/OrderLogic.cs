@@ -35,7 +35,7 @@ namespace PizzaShopDatabaseImplement.Implements
                 }
 
                 element.PizzaId = model.PizzaId == 0 ? element.PizzaId : model.PizzaId;
-                element.ClientId = model.ClientId == null ? element.ClientId : (int)model.ClientId;
+                element.ClientId = model.ClientId.Value;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.ImplementerId = model.ImplementerId;
@@ -84,8 +84,7 @@ namespace PizzaShopDatabaseImplement.Implements
                    Count = rec.Count,
                    Sum = rec.Sum,
                    ClientFIO = rec.Client.FIO,
-                   ImplementerFIO = rec.ImplementerId.HasValue ?
-               rec.Implementer.ImplementerFIO : string.Empty,
+                   ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
                    PizzaName = rec.Pizza.PizzaName
                })
                .ToList();

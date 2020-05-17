@@ -175,11 +175,5 @@ namespace PizzaAbstractShopView
             work.DoWork();
             LoadData();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            work.DoWork();
-            LoadData();
-        }
     }
 }
