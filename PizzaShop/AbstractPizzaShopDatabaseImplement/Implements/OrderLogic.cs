@@ -73,7 +73,7 @@ namespace PizzaShopDatabaseImplement.Implements
                     Count = rec.Count,
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement,
-                    PizzaName = context.Pizzas.FirstOrDefault((r) => r.Id == rec.PizzaId).PizzaName,
+                    PizzaName = rec.Pizza.PizzaName,
                     PizzaId = rec.PizzaId,
                     Status = rec.Status,
                     Sum = rec.Sum
