@@ -271,7 +271,7 @@ namespace PizzaShopFileImplement
                         new XElement("Count", elem.Count)));
                 }
                 XDocument xDocument = new XDocument(xElement);
-                xDocument.Save(IngridientFileName);
+                xDocument.Save(StorageIngridientFileName);
             }
         }
     }

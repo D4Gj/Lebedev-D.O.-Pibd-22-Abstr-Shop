@@ -21,8 +21,7 @@ namespace PizzaAbstractShopView
 
         public int Id { set { id = value; } }
         private readonly IStorageLogic logic;
-        private int? id;
-        private List<StorageIngridientViewModel> storageIngridients;
+        private int? id;        
 
         public FormStorage(IStorageLogic logic)
         {
@@ -36,44 +35,36 @@ namespace PizzaAbstractShopView
             {
                 try
                 {
-                    StorageViewModel view = logic.GetElement(id.Value);
+                    var view = logic.GetElement(id.Value);
                     if (view != null)
                     {
                         textBoxName.Text = view.StorageName;
-                        storageIngridients = view.StorageIngridients;
-                        LoadData();
+                    }
+                    var storageList = logic.GetList();
+                    var storageIngridients = storageList[0].StorageIngridients;
+                    for (int i = 0; i < storageList.Count; ++i)
+                    {
+                        if (storageList[i].Id == id)
+                        {
+                            storageIngridients = storageList[i].StorageIngridients;
+                        }
+                    }
+                    if (storageIngridients != null)
+                    {
+                        dataGridView.DataSource = storageIngridients;
+                        dataGridView.Columns[0].Visible = false;
+                        dataGridView.Columns[1].Visible = false;
+                        dataGridView.Columns[2].Visible = false;
+                        dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                storageIngridients = new List<StorageIngridientViewModel>();
-            }
-        }
-
-        private void LoadData()
-        {
-            try
-            {
-                if (storageIngridients != null)
-                {
-                    dataGridView.DataSource = null;
-                    dataGridView.DataSource = storageIngridients;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        }         
 
         private void buttonSave_Click(object sender, EventArgs e)
         {

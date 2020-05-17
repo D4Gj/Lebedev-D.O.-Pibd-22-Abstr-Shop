@@ -105,7 +105,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
         }
         public void ReplenishStorage(StorageIngridientBindingModel model)
         {
-            storageLogic.AddComponent(model);
+            storageLogic.ReplenishStorage(model);
         }
     }
 }

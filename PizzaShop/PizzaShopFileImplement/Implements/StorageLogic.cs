@@ -101,7 +101,7 @@ namespace PizzaShopFileImplement.Implements
                 throw new Exception("Элемент не найден");
             }
         }
-        public void AddComponent(StorageIngridientBindingModel model)
+        public void ReplenishStorage(StorageIngridientBindingModel model)
         {
             var item = source.StorageIngridients.FirstOrDefault(x => x.IngridientId == model.IngridientId
                    && x.StorageId == model.StorageId);

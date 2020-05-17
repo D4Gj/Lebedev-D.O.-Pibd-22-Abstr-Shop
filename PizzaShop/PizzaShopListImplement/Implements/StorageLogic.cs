@@ -180,7 +180,7 @@ namespace PizzaShopListImplement.Implements
             throw new Exception("Элемент не найден");
         }
 
-        public void AddComponent(StorageIngridientBindingModel model)
+        public void ReplenishStorage(StorageIngridientBindingModel model)
         {
             int findItemIndex = -1;
             for (int i = 0; i < source.StorageIngridients.Count; ++i)
