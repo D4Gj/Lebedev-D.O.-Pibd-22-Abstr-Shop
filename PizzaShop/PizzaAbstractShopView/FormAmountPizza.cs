@@ -23,10 +23,6 @@ namespace PizzaAbstractShopView
             InitializeComponent();
             this.logic = logic;
         }
-        private void FormAmountIngridients_Load(object sender, EventArgs e)
-        {
-            LoadData();
-        }
         private void LoadData()
         {
             try
@@ -89,6 +85,11 @@ namespace PizzaAbstractShopView
         }
 
         private void buttonUpd_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void FormAmountPizza_Load(object sender, EventArgs e)
         {
             LoadData();
         }
