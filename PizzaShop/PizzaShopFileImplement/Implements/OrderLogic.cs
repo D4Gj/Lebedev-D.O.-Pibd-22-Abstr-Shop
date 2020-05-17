@@ -62,8 +62,7 @@ namespace PizzaShopFileImplement.Implements
             {
                 Id = rec.Id,
                 Count = rec.Count,
-                PizzaName = source.Pizza.Where(recPC => recPC.Id==rec.PizzaId)
-                .FirstOrDefault(recC => recC.Id==rec.PizzaId).PizzaName,
+                PizzaName = GetPizzaName(rec.PizzaId),
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement,
                 PizzaId = rec.PizzaId,
@@ -71,6 +70,15 @@ namespace PizzaShopFileImplement.Implements
                 Sum = rec.Sum
             })
             .ToList();
+        }
+        private string GetPizzaName(int id)
+        {
+            string name = "";
+            var product = source.Pizzas.FirstOrDefault(x => x.Id == id);
+
+            name = pizza != null ? pizza.PizzaName : "";
+
+            return name;
         }
     }
 }
