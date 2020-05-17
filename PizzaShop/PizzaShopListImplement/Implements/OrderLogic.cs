@@ -86,7 +86,9 @@ namespace PizzaShopListImplement.Implements
 
         private Order CreateModel(OrderBindingModel model, Order order)
         {
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
+            order.ImplementerId = model.ImplementerId;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = model.ClientId.Value;

@@ -6,6 +6,7 @@ using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.ViewModels;
 using PizzaShopFileImplement.Models;
 using System.Linq;
+using PizzaShopBusinessLogic.Enums;
 
 namespace PizzaShopFileImplement.Implements
 {
@@ -36,6 +37,7 @@ namespace PizzaShopFileImplement.Implements
             }
             element.Status = model.Status;
             element.ClientId = model.ClientId.Value;
+            element.ImplementerId = model.ImplementerId;
             element.PizzaId = model.PizzaId;
             element.Count = model.Count;
             element.Sum = model.Sum;
@@ -58,22 +60,31 @@ namespace PizzaShopFileImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
-            .Where(rec => model == null || rec.Id == model.Id)
+            .Where(rec => model == null || rec.Id == model.Id || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            || (model.ClientId.HasValue && rec.ClientId == model.ClientId)
+            || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue
+            || model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется)
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
-                Count = rec.Count,
-                PizzaName = source.Pizzas.Where(recPC => recPC.Id==rec.PizzaId)
-                .FirstOrDefault(recC => recC.Id==rec.PizzaId).PizzaName,
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement,
-                PizzaId = rec.PizzaId,
-                Status = rec.Status,
+                PizzaName = GetPizzaName(rec.PizzaId),
                 ClientId = rec.ClientId,
-                ClientFIO = rec.ClientFIO,
-                Sum = rec.Sum
+                ClientFIO = source.Clients.FirstOrDefault(recC => recC.Id == rec.ClientId)?.FIO,
+                ImplementerFIO = source.Implementers.FirstOrDefault(recC => recC.Id == rec.ImplementerId)?.ImplementerFIO,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                Status = rec.Status,
+                DateCreate = rec.DateCreate,
+                DateImplement = rec.DateImplement
             })
             .ToList();
+        }
+        private string GetPizzaName(int id)
+        {
+            string name = "";
+            var Pizza = source.Pizzas.FirstOrDefault(x => x.Id == id);
+            name = Pizza != null ? Pizza.PizzaName : "";
+            return name;
         }
     }
 }
