@@ -54,6 +54,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                 Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                 mainLogic.FinishOrder(new ChangeStatusBindingModel
                 {
+
                     OrderId = order.Id
                 });
                 // отдыхаем
@@ -78,7 +79,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
 
                         mainLogic.FinishOrder(new ChangeStatusBindingModel
                         {
-                            OrderId = order.Id
+                            OrderId = order.Id,
                         });
                         // отдыхаем
                         Thread.Sleep(implementer.PauseTime);

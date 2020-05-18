@@ -8,7 +8,7 @@ namespace PizzaShopBusinessLogic.ViewModels
     public class ImplementerViewModel
     {
         public int Id { get; set; }
-        [DisplayName("ФИО исполнителя")]
+        [DisplayName("Исполнитель")]
         public string ImplementerFIO { get; set; }
         [DisplayName("Время на заказ")]
         public int WorkingTime { get; set; }

@@ -52,7 +52,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     Id = order.Id,
                     PizzaId = order.PizzaId,
                     ClientId = order.ClientId,
-                    ImplementerId = order.ImplementerId,
+                    ImplementerId = model.ImplementerId,
                     Count = order.Count,
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
