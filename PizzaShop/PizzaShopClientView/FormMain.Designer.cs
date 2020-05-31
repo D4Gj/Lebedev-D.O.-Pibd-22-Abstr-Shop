@@ -62,7 +62,8 @@
             this.менюToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.создатьЗаказToolStripMenuItem,
             this.обновитьСписокToolStripMenuItem,
-            this.изменитьДанныеToolStripMenuItem});
+            this.изменитьДанныеToolStripMenuItem,
+            this.сообщенияToolStripMenuItem});
             this.менюToolStripMenuItem.Name = "менюToolStripMenuItem";
             this.менюToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.менюToolStripMenuItem.Text = "Меню";
@@ -91,7 +92,7 @@
             // сообщенияToolStripMenuItem
             // 
             this.сообщенияToolStripMenuItem.Name = "сообщенияToolStripMenuItem";
-            this.сообщенияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сообщенияToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.сообщенияToolStripMenuItem.Text = "Сообщения";
             this.сообщенияToolStripMenuItem.Click += new System.EventHandler(this.сообщенияToolStripMenuItem_Click);
             // 

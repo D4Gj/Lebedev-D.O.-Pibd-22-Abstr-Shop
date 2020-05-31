@@ -36,10 +36,6 @@ namespace PizzaAbstractShopView
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(container.Resolve<FormMain>());
         }
-        private static void MailCheck(object obj)
-        {
-            MailLogic.MailCheck((MailCheckInfo)obj);
-        }
         private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
@@ -54,7 +50,12 @@ namespace PizzaAbstractShopView
             currentContainer.RegisterType<IImplementerLogic, ImplementerLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IClientLogic, ClientLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMessageInfoLogic,MessageInfoLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<WorkModeling>(new HierarchicalLifetimeManager());
             return currentContainer;
+        }
+        private static void MailCheck(object obj)
+        {
+            MailLogic.MailCheck((MailCheckInfo)obj);
         }
     }
 }

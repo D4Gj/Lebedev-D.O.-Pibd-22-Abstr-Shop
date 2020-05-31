@@ -23,19 +23,31 @@ namespace PizzaShopRestApi.Controllers
         public ClientController(IClientLogic logic,IMessageInfoLogic messageInfoLogic)
         {
             _logic = logic;
-            this._messageLogic = messageInfoLogic;
+            _messageLogic = messageInfoLogic;
         }
 
         [HttpGet]
-        public ClientViewModel Login(string login, string password) => _logic.Read(new ClientBindingModel { Login = login, Password = password })?[0];
+        public ClientViewModel Login(string login, string password) => _logic.Read(new ClientBindingModel
+        {
+            Login = login,
+            Password = password
+        })?.FirstOrDefault();
         [HttpGet]
         public List<MessageInfoViewModel> GetMessages(int clientId) => _messageLogic.Read(new MessageInfoBindingModel { ClientId = clientId });
 
         [HttpPost]
-        public void Register(ClientBindingModel model) => _logic.CreateOrUpdate(model);
+        public void Register(ClientBindingModel model)
+        {
+            CheckData(model);
+            _logic.CreateOrUpdate(model);
+        }
 
         [HttpPost]
-        public void UpdateData(ClientBindingModel model) => _logic.CreateOrUpdate(model);
+        public void UpdateData(ClientBindingModel model)
+        {
+            CheckData(model);
+            _logic.CreateOrUpdate(model);
+        }
         private void CheckData(ClientBindingModel model)
         {
             if (!Regex.IsMatch(model.Login, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
@@ -44,8 +56,8 @@ namespace PizzaShopRestApi.Controllers
             }
 
             if (model.Password.Length > _passwordMaxLength
-                || model.Password.Length < _passwordMinLength
-                || !Regex.IsMatch(model.Password, @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
+                && model.Password.Length < _passwordMinLength
+                && !Regex.IsMatch(model.Password, @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
             {
                 throw new Exception($"Пароль должен быть длиной от {_passwordMinLength} до { _passwordMaxLength } и должен состоять из цифр, букв и небуквенных символов");
             }

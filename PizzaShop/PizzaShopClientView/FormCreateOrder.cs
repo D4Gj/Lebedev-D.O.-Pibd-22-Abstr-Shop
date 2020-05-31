@@ -22,7 +22,7 @@ namespace PizzaShopClientView
         {
             try
             {
-                comboBoxPizza.DisplayMember = "ProductName";
+                comboBoxPizza.DisplayMember = "PizzaName";
                 comboBoxPizza.ValueMember = "Id";
                 comboBoxPizza.DataSource = APIClient.GetRequest<List<PizzaViewModel>>("api/main/getproductlist");
                 comboBoxPizza.SelectedItem = null;
@@ -40,7 +40,7 @@ namespace PizzaShopClientView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxPizza.SelectedValue);
-                    PizzaViewModel product = APIClient.GetRequest<PizzaViewModel>($"api/main/getproduct?productId={id}");
+                    PizzaViewModel product = APIClient.GetRequest<PizzaViewModel>($"api/main/getproduct?pizzaId={id}");
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxSum.Text = (count * product.Price).ToString();
                 }
