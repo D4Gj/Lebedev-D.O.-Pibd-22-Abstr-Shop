@@ -23,25 +23,20 @@ namespace PizzaShopDatabaseImplement.Implements
                     if (order == null)
                     {
                         throw new Exception("Элемент не найден");
-                    }
-                    order.PizzaId = model.PizzaId;
-                    order.Status = model.Status;
-                    order.Count = model.Count;
-                    order.Sum = model.Sum;
-                    order.DateCreate = model.DateCreate;
-                    order.DateImplement = model.DateImplement;
+                    }                    
                 }
                 else
                 {
                     order = new Order();
-                    order.PizzaId = model.PizzaId;
-                    order.Status = model.Status;
-                    order.Count = model.Count;
-                    order.Sum = model.Sum;
-                    order.DateCreate = model.DateCreate;
-                    order.DateImplement = model.DateImplement;
+                    
                     context.Orders.Add(order);
                 }
+                order.PizzaId = model.PizzaId;
+                order.Status = model.Status;
+                order.Count = model.Count;
+                order.Sum = model.Sum;
+                order.DateCreate = model.DateCreate;
+                order.DateImplement = model.DateImplement;
                 context.SaveChanges();
             }
         }
@@ -67,6 +62,7 @@ namespace PizzaShopDatabaseImplement.Implements
             {
                 return context.Orders
                 .Where(rec => model == null || rec.Id == model.Id)
+                .Include(rec => rec.Pizza)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
