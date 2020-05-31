@@ -91,6 +91,7 @@ namespace PizzaShopFileImplement.Implements
         }
         public void DelElement(int id)
         {
+            source.StorageIngridients.RemoveAll(rec => rec.StorageId == id);
             var elem = source.Storages.FirstOrDefault(x => x.Id == id);
             if (elem != null)
             {
@@ -125,7 +126,6 @@ namespace PizzaShopFileImplement.Implements
         
         public bool IsIngridientAvailible(int pizzaId, int pizzasCount)
         {
-            bool result = true;
             var PizzaIngridients = source.PizzaIngridients.Where(x => x.PizzaId == pizzaId);
             if (PizzaIngridients.Count() == 0) return false;
             foreach (var elem in PizzaIngridients)
@@ -136,7 +136,7 @@ namespace PizzaShopFileImplement.Implements
                 if (count < elem.Count * pizzasCount)
                     return false;
             }
-            return result;
+            return true;
         }
         public void RemoveFromStorage(int pizzaId, int pizzasCount)
         {
