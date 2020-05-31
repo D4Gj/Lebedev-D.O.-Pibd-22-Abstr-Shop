@@ -20,7 +20,6 @@ namespace PizzaShopBusinessLogic.Interfaces
 
         void ReplenishStorage(StorageIngridientBindingModel model);
 
-        bool IsIngridientAvailible(int pizzaId, int pizzasCount);
         void RemoveFromStorage(int pizzaId, int pizzasCount);
 
     }

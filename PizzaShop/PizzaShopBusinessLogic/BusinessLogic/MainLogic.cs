@@ -43,21 +43,24 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            if (!storageLogic.IsIngridientAvailible(order.PizzaId, order.Count))
+            try
             {
-                throw new Exception("На складе не хватает ингридиентов");
+                storageLogic.RemoveFromStorage(order.PizzaId, order.Count);
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    PizzaId = order.PizzaId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
             }
-            orderLogic.CreateOrUpdate(new OrderBindingModel
+            catch (Exception ex)
             {
-                Id = order.Id,
-                PizzaId = order.PizzaId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
-            storageLogic.RemoveFromStorage(order.PizzaId, order.Count);
+                throw ex;
+            }
         }
         public void PayOrder(ChangeStatusBindingModel model)
         {

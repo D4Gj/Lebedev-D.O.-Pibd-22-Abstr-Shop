@@ -116,6 +116,47 @@ namespace PizzaShopDatabaseImplement.Migrations
                     b.ToTable("PizzaIngridients");
                 });
 
+            modelBuilder.Entity("PizzaShopDatabaseImplement.Models.Storage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StorageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Storages");
+                });
+
+            modelBuilder.Entity("PizzaShopDatabaseImplement.Models.StorageIngridient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngridientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StorageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngridientId");
+
+                    b.HasIndex("StorageId");
+
+                    b.ToTable("StorageIngridients");
+                });
+
             modelBuilder.Entity("PizzaShopDatabaseImplement.Models.Ingridient", b =>
                 {
                     b.HasOne("PizzaShopDatabaseImplement.Models.Ingridient", null)
@@ -143,6 +184,21 @@ namespace PizzaShopDatabaseImplement.Migrations
                     b.HasOne("PizzaShopDatabaseImplement.Models.Pizza", "Pizza")
                         .WithMany("PizzaIngridients")
                         .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PizzaShopDatabaseImplement.Models.StorageIngridient", b =>
+                {
+                    b.HasOne("PizzaShopDatabaseImplement.Models.Ingridient", "Ingridient")
+                        .WithMany()
+                        .HasForeignKey("IngridientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PizzaShopDatabaseImplement.Models.Storage", "Storage")
+                        .WithMany("StorageIngridients")
+                        .HasForeignKey("StorageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

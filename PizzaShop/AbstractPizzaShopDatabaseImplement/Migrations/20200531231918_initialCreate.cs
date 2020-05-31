@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PizzaShopDatabaseImplement.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,6 +39,19 @@ namespace PizzaShopDatabaseImplement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pizzas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Storages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StorageName = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Storages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,6 +105,33 @@ namespace PizzaShopDatabaseImplement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "StorageIngridients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StorageId = table.Column<int>(nullable: false),
+                    IngridientId = table.Column<int>(nullable: false),
+                    Count = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StorageIngridients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StorageIngridients_Ingridients_IngridientId",
+                        column: x => x.IngridientId,
+                        principalTable: "Ingridients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StorageIngridients_Storages_StorageId",
+                        column: x => x.StorageId,
+                        principalTable: "Storages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Ingridients_IngridientId",
                 table: "Ingridients",
@@ -111,6 +151,16 @@ namespace PizzaShopDatabaseImplement.Migrations
                 name: "IX_PizzaIngridients_PizzaId",
                 table: "PizzaIngridients",
                 column: "PizzaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StorageIngridients_IngridientId",
+                table: "StorageIngridients",
+                column: "IngridientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StorageIngridients_StorageId",
+                table: "StorageIngridients",
+                column: "StorageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -122,10 +172,16 @@ namespace PizzaShopDatabaseImplement.Migrations
                 name: "PizzaIngridients");
 
             migrationBuilder.DropTable(
-                name: "Ingridients");
+                name: "StorageIngridients");
 
             migrationBuilder.DropTable(
                 name: "Pizzas");
+
+            migrationBuilder.DropTable(
+                name: "Ingridients");
+
+            migrationBuilder.DropTable(
+                name: "Storages");
         }
     }
 }

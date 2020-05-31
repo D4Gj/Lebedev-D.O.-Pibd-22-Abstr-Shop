@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PizzaShopDatabaseImplement
 {
-    class PizzaShopDatabase
+    public class PizzaShopDatabase
     {
     }
 }
