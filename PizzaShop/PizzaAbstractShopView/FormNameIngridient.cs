@@ -19,7 +19,7 @@ namespace PizzaAbstractShopView
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
         private readonly IIngridientLogic logic;
-        private int? id;
+        private int? id;        
 
         public FormNameIngridient(IIngridientLogic logic)
         {

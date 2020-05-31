@@ -23,10 +23,6 @@ namespace PizzaAbstractShopView
             InitializeComponent();
             this.logic = logic;
         }
-        private void FormAmountIngridients_Load(object sender, EventArgs e)
-        {
-            LoadData();
-        }
         private void LoadData()
         {
             try
@@ -37,6 +33,7 @@ namespace PizzaAbstractShopView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[3].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -88,6 +85,11 @@ namespace PizzaAbstractShopView
         }
 
         private void buttonUpd_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void FormAmountPizza_Load(object sender, EventArgs e)
         {
             LoadData();
         }
