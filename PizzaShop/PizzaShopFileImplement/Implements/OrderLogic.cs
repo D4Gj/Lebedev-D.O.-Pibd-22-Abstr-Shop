@@ -68,6 +68,8 @@ namespace PizzaShopFileImplement.Implements
             {
                 Id = rec.Id,
                 PizzaName = GetPizzaName(rec.PizzaId),
+                ImplementerId = rec.ImplementerId,
+                PizzaId = rec.PizzaId,
                 ClientId = rec.ClientId,
                 ClientFIO = source.Clients.FirstOrDefault(recC => recC.Id == rec.ClientId)?.FIO,
                 ImplementerFIO = source.Implementers.FirstOrDefault(recC => recC.Id == rec.ImplementerId)?.ImplementerFIO,
