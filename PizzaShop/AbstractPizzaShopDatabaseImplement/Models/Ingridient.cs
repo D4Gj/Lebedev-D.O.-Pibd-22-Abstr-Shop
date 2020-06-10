@@ -14,5 +14,7 @@ namespace PizzaShopDatabaseImplement.Models
         public string IngridientName { get; set; }
         [ForeignKey("IngridientId")]
         public virtual List<Ingridient> Ingridients { get; set; }
+        [ForeignKey("IngridientId")]
+        public virtual List<StorageIngridient> StorageIngridients { get; set; }
     }
 }

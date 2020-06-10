@@ -57,9 +57,9 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     Status = OrderStatus.Выполняется
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         public void PayOrder(ChangeStatusBindingModel model)
