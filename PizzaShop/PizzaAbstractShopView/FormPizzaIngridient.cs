@@ -69,10 +69,3 @@ namespace PizzaAbstractShopView
         }
     }
 }
-
-
-
-
-
-
-
