@@ -4,11 +4,14 @@ using System.Text;
 
 namespace PizzaShopListImplement.Models
 {
-    public class PizzaIngredient
+    public class Client
     {
         public int Id { get; set; }
-        public int PizzaId { get; set; }
-        public int IngridientID { get; set; }
-        public int Count { get; set; }
+
+        public string FIO { get; set; }
+
+        public string Login { get; set; }
+
+        public string Password { get; set; }
     }
 }

@@ -15,18 +15,21 @@ namespace PizzaShopFileImplement
         private static FileDataListSingleton instance;
         private readonly string IngredientFileName = "Ingridient.xml";
         private readonly string OrderFileName = "Order.xml";
-        private readonly string PizzaFileName = "Pizza.xml";
+        private readonly string PizzaFileName = "Pizzas.xml";
         private readonly string PizzaIngredientFileName = "PizzaIngridient.xml";
+        private readonly string ClientFileName = "Client.xml";
         public List<Ingridient> Ingridients { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Pizza> Pizza { get; set; }
+        public List<Pizza> Pizzas { get; set; }
         public List<PizzaIngredient> PizzaIngridients { get; set; }
+        public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Ingridients = LoadIngredients();
             Orders = LoadOrders();
-            Pizza = LoadPizza();
+            Pizzas = LoadPizza();
             PizzaIngridients = LoadPizzaIngredients();
+            Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -42,6 +45,7 @@ namespace PizzaShopFileImplement
             SaveOrders();
             SavePizza();
             SavePizzaIngredients();
+            SaveClients();
         }
         private List<Ingridient> LoadIngredients()
         {
@@ -94,7 +98,7 @@ namespace PizzaShopFileImplement
             if (File.Exists(PizzaFileName))
             {
                 XDocument xDocument = XDocument.Load(PizzaFileName);
-                var xElements = xDocument.Root.Elements("Pizza").ToList();
+                var xElements = xDocument.Root.Elements("Pizzas").ToList();
                 foreach (var elem in xElements)
                 {
                     list.Add(new Pizza
@@ -164,12 +168,12 @@ namespace PizzaShopFileImplement
         }
         private void SavePizza()
         {
-            if (Pizza != null)
+            if (Pizzas != null)
             {
-                var xElement = new XElement("Pizza");
-                foreach (var product in Pizza)
+                var xElement = new XElement("Pizzas");
+                foreach (var product in Pizzas)
                 {
-                    xElement.Add(new XElement("Pizza",
+                    xElement.Add(new XElement("Pizzas",
                     new XAttribute("Id", product.Id),
                     new XElement("PizzaName", product.PizzaName),
                     new XElement("Price", product.Price)));
@@ -193,6 +197,48 @@ namespace PizzaShopFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(PizzaIngredientFileName);
+            }
+        }
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        FIO = elem.Element("FIO").Value,
+                        Login = elem.Element("Login").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+
+            return list;
+        }
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("FIO", client.FIO),
+                    new XElement("Login", client.Login),
+                    new XElement("Password", client.Password)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
     }

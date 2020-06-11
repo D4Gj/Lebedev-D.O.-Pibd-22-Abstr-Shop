@@ -5,6 +5,7 @@ using PizzaShopListImplement.Models;
 using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.ViewModels;
 using PizzaShopBusinessLogic.Interfaces;
+using System.Linq;
 
 namespace PizzaShopListImplement.Implements
 {
@@ -17,33 +18,53 @@ namespace PizzaShopListImplement.Implements
         }
         public void CreateOrUpdate(PizzaBindingModel model)
         {
-            Pizza tempProduct = model.Id.HasValue ? null : new Pizza { Id = 1 };
-            foreach (var product in source.Pizzas)
+            Pizza element = source.Pizzas.FirstOrDefault(rec => rec.PizzaName ==
+            model.PizzaName && rec.Id != model.Id);
+            if (element != null)
             {
-                if (product.PizzaName == model.PizzaName && product.Id != model.Id)
-                {
-                    throw new Exception("Уже есть изделие с таким названием");
-                }
-                if (!model.Id.HasValue && product.Id >= tempProduct.Id)
-                {
-                    tempProduct.Id = product.Id + 1;
-                }
-                else if (model.Id.HasValue && product.Id == model.Id)
-                {
-                    tempProduct = product;
-                }
+                throw new Exception("Уже есть пицца с таким названием");
             }
             if (model.Id.HasValue)
             {
-                if (tempProduct == null)
+                element = source.Pizzas.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, tempProduct);
             }
             else
             {
-                source.Pizzas.Add(CreateModel(model, tempProduct));
+                int maxId = source.Pizzas.Count > 0 ? source.Ingridients.Max(rec =>
+               rec.Id) : 0;
+                element = new Pizza { Id = maxId + 1 };
+                source.Pizzas.Add(element);
+            }
+            element.PizzaName = model.PizzaName;
+            element.Price = model.Price;
+            // удалили те, которых нет в модели
+            source.PizzaIngredients.RemoveAll(rec => rec.PizzaId == model.Id &&
+           !model.PizzaIngridients.ContainsKey(rec.IngridientID));
+            // обновили количество у существующих записей
+            var updateComponents = source.PizzaIngredients.Where(rec => rec.IngridientID ==
+           model.Id && model.PizzaIngridients.ContainsKey(rec.IngridientID));
+            foreach (var updateComponent in updateComponents)
+            {
+                updateComponent.Count =
+               model.PizzaIngridients[updateComponent.IngridientID].Item2;
+                model.PizzaIngridients.Remove(updateComponent.IngridientID);
+            }
+            // добавили новые
+            int maxPCId = source.PizzaIngredients.Count > 0 ?
+           source.PizzaIngredients.Max(rec => rec.Id) : 0;
+            foreach (var pc in model.PizzaIngridients)
+            {
+                source.PizzaIngredients.Add(new PizzaIngridient
+                {
+                    Id = ++maxPCId,
+                    PizzaId = element.Id,
+                    IngridientID = pc.Key,
+                    Count = pc.Value.Item2
+                });
             }
         }
         public void Delete(PizzaBindingModel model)
@@ -100,7 +121,7 @@ namespace PizzaShopListImplement.Implements
             // новые записи
             foreach (var pc in model.PizzaIngridients)
             {
-                source.PizzaIngredients.Add(new PizzaIngredient
+                source.PizzaIngredients.Add(new PizzaIngridient
                 {
                     Id = ++maxPCId,
                     PizzaId = product.Id,

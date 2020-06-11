@@ -35,6 +35,7 @@ namespace PizzaShopFileImplement.Implements
                 source.Orders.Add(element);
             }
             element.Status = model.Status;
+            element.ClientId = model.ClientId.Value;
             element.PizzaId = model.PizzaId;
             element.Count = model.Count;
             element.Sum = model.Sum;
@@ -67,6 +68,7 @@ namespace PizzaShopFileImplement.Implements
                 DateImplement = rec.DateImplement,
                 PizzaId = rec.PizzaId,
                 Status = rec.Status,
+                ClientId = rec.ClientId,
                 Sum = rec.Sum
             })
             .ToList();
@@ -74,7 +76,7 @@ namespace PizzaShopFileImplement.Implements
         private string GetPizzaName(int id)
         {
             string name = "";
-            var pizza = source.Pizza.FirstOrDefault(x => x.Id == id);
+            var pizza = source.Pizzas.FirstOrDefault(x => x.Id == id);
 
             name = pizza != null ? pizza.PizzaName : "";
 

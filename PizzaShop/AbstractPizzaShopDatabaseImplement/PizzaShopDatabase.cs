@@ -18,5 +18,6 @@ namespace PizzaShopDatabaseImplement
         public virtual DbSet<Pizza> Pizzas { set; get; }
         public virtual DbSet<PizzaIngridient> PizzaIngridients { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { get; set; }
     }
 }

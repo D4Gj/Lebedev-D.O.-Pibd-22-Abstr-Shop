@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1022
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaAbstractShopView", "PizzaAbstractShopView\PizzaAbstractShopView.csproj", "{498F9383-7966-4B7C-B744-EEC4A270923F}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaShopFileImplement", "PizzaShopFileImplement\PizzaShopFileImplement.csproj", "{9A490AA9-E1EF-40D6-A2A8-64B3A8C1B542}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaShopDatabaseImplement", "AbstractPizzaShopDatabaseImplement\PizzaShopDatabaseImplement.csproj", "{C757DAF1-68C3-40FB-8FFC-12645FD4D2FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaShopRestApi", "PizzaShopRestApi\PizzaShopRestApi.csproj", "{8EDE652D-3CDD-4D59-8535-BF7E58EBF2CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaShopClientView", "PizzaShopClientView\PizzaShopClientView.csproj", "{AA26ED2E-E3F7-4638-BC78-F62DD02FFF28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{C757DAF1-68C3-40FB-8FFC-12645FD4D2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C757DAF1-68C3-40FB-8FFC-12645FD4D2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C757DAF1-68C3-40FB-8FFC-12645FD4D2FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDE652D-3CDD-4D59-8535-BF7E58EBF2CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDE652D-3CDD-4D59-8535-BF7E58EBF2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDE652D-3CDD-4D59-8535-BF7E58EBF2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDE652D-3CDD-4D59-8535-BF7E58EBF2CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA26ED2E-E3F7-4638-BC78-F62DD02FFF28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA26ED2E-E3F7-4638-BC78-F62DD02FFF28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA26ED2E-E3F7-4638-BC78-F62DD02FFF28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA26ED2E-E3F7-4638-BC78-F62DD02FFF28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
