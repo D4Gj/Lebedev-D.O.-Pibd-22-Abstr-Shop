@@ -31,9 +31,9 @@ namespace PizzaAbstractShopView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IPizzaShopLogic, PizzaLogic>(new
            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IStorageLogic, StorageLogic>(new
-                HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
+
             return currentContainer;
         }
     }

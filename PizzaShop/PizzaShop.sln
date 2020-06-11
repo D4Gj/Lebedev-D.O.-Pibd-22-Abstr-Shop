@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaAbstractShopView", "PizzaAbstractShopView\PizzaAbstractShopView.csproj", "{498F9383-7966-4B7C-B744-EEC4A270923F}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaShopListImplement", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaShopFileImplement", "PizzaShopFileImplement\PizzaShopFileImplement.csproj", "{9A490AA9-E1EF-40D6-A2A8-64B3A8C1B542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaShopDatabaseImplement", "AbstractPizzaShopDatabaseImplement\PizzaShopDatabaseImplement.csproj", "{C757DAF1-68C3-40FB-8FFC-12645FD4D2FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaShopDatabaseImplement", "AbstractPizzaShopDatabaseImplement\PizzaShopDatabaseImplement.csproj", "{C757DAF1-68C3-40FB-8FFC-12645FD4D2FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

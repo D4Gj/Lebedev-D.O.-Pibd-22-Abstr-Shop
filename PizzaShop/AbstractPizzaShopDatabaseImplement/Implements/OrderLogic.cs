@@ -61,20 +61,23 @@ namespace PizzaShopDatabaseImplement.Implements
             using (var context = new PizzaShopDatabase())
             {
                 return context.Orders
-                .Where(rec => model == null || rec.Id == model.Id)
-                .Include(rec => rec.Pizza)
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    Count = rec.Count,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                    PizzaName = rec.Pizza.PizzaName,
-                    PizzaId = rec.PizzaId,
-                    Status = rec.Status,
-                    Sum = rec.Sum
-                })
-                .ToList();
+            .Where(
+                    rec => model == null
+                    || (rec.Id == model.Id && model.Id.HasValue)
+                    || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                )
+            .Select(rec => new OrderViewModel
+            {
+                Id = rec.Id,
+                PizzaId = rec.PizzaId,
+                PizzaName = rec.Pizza.PizzaName,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                Status = rec.Status,
+                DateCreate = rec.DateCreate,
+                DateImplement = rec.DateImplement
+            })
+            .ToList();
             }
         }
     }

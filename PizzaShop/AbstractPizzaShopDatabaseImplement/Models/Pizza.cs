@@ -15,9 +15,7 @@ namespace PizzaShopDatabaseImplement.Models
 
         [Required]
         public decimal Price { get; set; }
-       
         public virtual List<PizzaIngridient> PizzaIngridients { get; set; }
-       
         public virtual List<Order> Orders { get; set; }
     }
 }
