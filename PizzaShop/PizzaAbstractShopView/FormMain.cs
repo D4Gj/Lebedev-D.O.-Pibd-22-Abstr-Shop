@@ -139,6 +139,7 @@ namespace PizzaAbstractShopView
         private void buttonReplenish_Click_1(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReplenishStorage>();
+            form.ShowDialog();
 		}
         private void списокИнгридиентовToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -161,6 +162,30 @@ namespace PizzaAbstractShopView
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void пиццыПоСкладамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportStoragePizzas>();
+            form.ShowDialog();
+        }
+
+        private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SaveStoragesToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void списокПиццToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportIngridients>();
             form.ShowDialog();
         }
     }

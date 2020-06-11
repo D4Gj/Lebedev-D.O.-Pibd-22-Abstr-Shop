@@ -14,12 +14,14 @@ namespace PizzaShopBusinessLogic.BusinessLogic
         private readonly IIngridientLogic ingridientLogic;
         private readonly IPizzaShopLogic pizzaShopLogic;
         private readonly IOrderLogic orderLogic;
+        private readonly IStorageLogic storageLogic;
         public ReportLogic(IPizzaShopLogic pizzaShopLogic, IIngridientLogic ingridientLogic,
-       IOrderLogic orderLogic)
+       IOrderLogic orderLogic,IStorageLogic storageLogic)
         {
             this.pizzaShopLogic = pizzaShopLogic;
             this.ingridientLogic = ingridientLogic;
             this.orderLogic = orderLogic;
+            this.storageLogic = storageLogic;
         }
         public List<ReportPizzaOrdersViewModel> GetPizzaIngridient()
         {
@@ -36,6 +38,26 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                             Count = pizzIngr.Value.Item2
                         };
                         list.Add(record);
+                }
+            }
+            return list;
+        }
+
+        public List<ReportStorageIngridientViewModel> GetStorageIngridients()
+        {
+            var list = new List<ReportStorageIngridientViewModel>();
+            var storages = storageLogic.GetList();
+            foreach (var storage in storages)
+            {
+                foreach (var sf in storage.StorageIngridients)
+                {
+                    var record = new ReportStorageIngridientViewModel
+                    {
+                        StorageName = storage.StorageName,
+                        IngridientName = sf.IngridientName,
+                        Count = sf.Count
+                    };
+                    list.Add(record);
                 }
             }
             return list;
@@ -86,6 +108,34 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                 FileName = model.FileName,
                 Title = "Список пицц",
                 Pizzas = GetPizzaIngridient()            
+            });
+        }
+
+        public void SaveStoragesToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDoc(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                Storages = storageLogic.GetList()
+            });
+        }
+        public void SaveStorageFoodsToExcelFile(ReportBindingModel model)
+        {
+            SaveToExcel.CreateDoc(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список продуктов в складах",
+                Storages = storageLogic.GetList()
+            });
+        }
+        public void SaveStorageFoodsToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список продуктов",
+                StorageFoods = GetStorageIngridients()
             });
         }
     }

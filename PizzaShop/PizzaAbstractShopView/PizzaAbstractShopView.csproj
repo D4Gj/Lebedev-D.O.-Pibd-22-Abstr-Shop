@@ -213,6 +213,12 @@
     <Compile Include="FormPizzaIngridient.Designer.cs">
       <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportIngridients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportIngridients.Designer.cs">
+      <DependentUpon>FormReportIngridients.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportOrders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,6 +261,12 @@
     <Compile Include="FormReplenishStorage.Designer.cs">
       <DependentUpon>FormReplenishStorage.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportStoragePizzas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportStoragePizzas.Designer.cs">
+      <DependentUpon>FormReportStoragePizzas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormStorage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPizzaIngridient.resx">
       <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportIngridients.resx">
+      <DependentUpon>FormReportIngridients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportOrders.resx">
       <DependentUpon>FormReportOrders.cs</DependentUpon>
@@ -315,6 +330,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="ReportOrders.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FormAmountIngridients.datasource" />
@@ -328,10 +344,16 @@
     <None Include="Properties\DataSources\PizzaAbstractShopView.Properties.Settings.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.IngridientViewModel.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.OrderViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.PizzaIngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.PizzaViewModel.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductComponentViewModel.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductViewModel.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportPizzaIngridientViewModel.datasource" />
     <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportPizzaOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportStorageIngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.StorageIngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.StorageViewModel.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

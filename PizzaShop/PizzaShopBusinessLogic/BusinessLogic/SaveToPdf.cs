@@ -20,27 +20,71 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             paragraph.Format.Alignment = ParagraphAlignment.Center;
             paragraph.Style = "NormalTitle"; 
             var table = document.LastSection.AddTable();
-            List<string> columns = new List<string> { "3cm", "6cm", "3cm"
+            List<string> columns = new List<string> { "6cm", "6cm", "6cm"
 };
             foreach (var elem in columns)
             {
                 table.AddColumn(elem);
             }
-            CreateRow(new PdfRowParameters
-            {
-                Table = table,
-                Texts = new List<string> { "Пицца", "Изделие", "Количество" },
-                Style = "NormalTitle",
-                ParagraphAlignment = ParagraphAlignment.Center
-            });
-            foreach (var pizza in info.Pizzas)
+            if (info.Pizzas != null)
             {
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { pizza.PizzaName,
+                    Texts = new List<string> { "Пицца", "Ингредиент", "Количество" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = ParagraphAlignment.Center
+                });
+                foreach (var pizza in info.Pizzas)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Table = table,
+                        Texts = new List<string>
+                    { pizza.PizzaName,
                         pizza.IngridientName,
                         pizza.Count.ToString()},
+                        Style = "Normal",
+                        ParagraphAlignment = ParagraphAlignment.Left
+                    });
+                }
+            }
+            else if (info.StorageFoods != null)
+            {
+                int sum = 0;
+                CreateRow(new PdfRowParameters
+                {
+                    Table = table,
+                    Texts = new List<string> { "Ингридиент", "Склад", "Количество" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = ParagraphAlignment.Center
+                });
+
+                foreach (var sf in info.StorageFoods)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Table = table,
+                        Texts = new List<string>
+                    {
+                        sf.IngridientName,
+                        sf.StorageName,
+                        sf.Count.ToString()
+                    },
+                        Style = "Normal",
+                        ParagraphAlignment = ParagraphAlignment.Left
+                    });
+                    sum += sf.Count;
+                }
+                CreateRow(new PdfRowParameters
+                {
+                    Table = table,
+                    Texts = new List<string>
+                    {
+                        "Всего",
+                        "",
+                        sum.ToString()
+                    },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });

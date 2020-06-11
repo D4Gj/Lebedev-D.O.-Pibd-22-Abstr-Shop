@@ -62,32 +62,59 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     CellToName = "C1"
                 });
                 uint rowIndex = 2;
-                foreach (var date in info.Orders)
+                if (info.Orders != null)
                 {
-                    decimal dateSum = 0;
-
-                    InsertCellInWorksheet(new ExcelCellParameters
+                    foreach (var date in info.Orders)
                     {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "A",
-                        RowIndex = rowIndex,
-                        Text = date.Key.ToString(),
-                        StyleIndex = 0U
-                    });
+                        decimal dateSum = 0;
 
-                    rowIndex++;
-
-                    foreach (var order in date)
-                    {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
                             Worksheet = worksheetPart.Worksheet,
                             ShareStringPart = shareStringPart,
-                            ColumnName = "B",
+                            ColumnName = "A",
                             RowIndex = rowIndex,
-                            Text = order.PizzaName,
-                            StyleIndex = 1U
+                            Text = date.Key.ToString(),
+                            StyleIndex = 0U
+                        });
+
+                        rowIndex++;
+
+                        foreach (var order in date)
+                        {
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "B",
+                                RowIndex = rowIndex,
+                                Text = order.PizzaName,
+                                StyleIndex = 1U
+                            });
+
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "C",
+                                RowIndex = rowIndex,
+                                Text = order.Sum.ToString(),
+                                StyleIndex = 1U
+                            });
+
+                            dateSum += order.Sum;
+
+                            rowIndex++;
+                        }
+
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "A",
+                            RowIndex = rowIndex,
+                            Text = "Итого",
+                            StyleIndex = 0U
                         });
 
                         InsertCellInWorksheet(new ExcelCellParameters
@@ -96,40 +123,79 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                             ShareStringPart = shareStringPart,
                             ColumnName = "C",
                             RowIndex = rowIndex,
-                            Text = order.Sum.ToString(),
-                            StyleIndex = 1U
+                            Text = dateSum.ToString(),
+                            StyleIndex = 0U
                         });
-
-                        dateSum += order.Sum;
 
                         rowIndex++;
                     }
 
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "A",
-                        RowIndex = rowIndex,
-                        Text = "Итого",
-                        StyleIndex = 0U
-                    });
-
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "C",
-                        RowIndex = rowIndex,
-                        Text = dateSum.ToString(),
-                        StyleIndex = 0U
-                    });
-
-                    rowIndex++;
+                    workbookpart.Workbook.Save();
                 }
+                else
+                {
+                    foreach (var storage in info.Storages)
+                    {
+                        int foodsSum = 0;
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "A",
+                            RowIndex = rowIndex,
+                            Text = storage.StorageName,
+                            StyleIndex = 0U
+                        });
+                        rowIndex++;
+                        foreach (var ingridients in storage.StorageIngridients)
+                        {
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "B",
+                                RowIndex = rowIndex,
+                                Text = ingridients.IngridientName,
+                                StyleIndex = 1U
+                            });
 
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "C",
+                                RowIndex = rowIndex,
+                                Text = ingridients.Count.ToString(),
+                                StyleIndex = 1U
+                            });
+                            foodsSum += ingridients.Count;
+                            rowIndex++;
+                        }
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "A",
+                            RowIndex = rowIndex,
+                            Text = "Итого",
+                            StyleIndex = 0U
+                        });
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = foodsSum.ToString(),
+                            StyleIndex = 0U
+                        });
+                        rowIndex++;
+                    }
+                }
                 workbookpart.Workbook.Save();
+            
             }
+            
         }
         /// <summary>
         /// Настройка стилей для файла

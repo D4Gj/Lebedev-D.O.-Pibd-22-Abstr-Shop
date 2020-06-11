@@ -8,7 +8,7 @@ using Unity.Lifetime;
 using PizzaShopDatabaseImplement.Implements;
 using PizzaShopBusinessLogic.Interfaces;
 using PizzaShopBusinessLogic.BusinessLogic;
-
+using PizzaShopDatabaseImplement.Models;
 
 namespace PizzaAbstractShopView
 {
@@ -30,6 +30,8 @@ namespace PizzaAbstractShopView
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IPizzaShopLogic, PizzaLogic>(new
+           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStorageLogic,StorageLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
