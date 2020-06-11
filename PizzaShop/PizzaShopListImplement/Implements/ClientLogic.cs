@@ -23,6 +23,10 @@ namespace PizzaShopListImplement.Implements
 
             foreach (var client in source.Clients)
             {
+                if (client.Login == tempClient.Login)
+                {
+                    throw new Exception("Данный логин уже зарегистрирован");
+                }
                 if (!model.Id.HasValue && client.Id >= tempClient.Id)
                 {
                     tempClient.Id = tempClient.Id + 1;

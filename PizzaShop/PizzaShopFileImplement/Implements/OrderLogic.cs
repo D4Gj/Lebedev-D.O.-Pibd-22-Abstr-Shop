@@ -69,7 +69,6 @@ namespace PizzaShopFileImplement.Implements
                 PizzaId = rec.PizzaId,
                 Status = rec.Status,
                 ClientId = rec.ClientId,
-                ClientFIO = rec.ClientFIO,
                 Sum = rec.Sum
             })
             .ToList();
@@ -77,7 +76,7 @@ namespace PizzaShopFileImplement.Implements
         private string GetPizzaName(int id)
         {
             string name = "";
-            var pizza = source.Pizza.FirstOrDefault(x => x.Id == id);
+            var pizza = source.Pizzas.FirstOrDefault(x => x.Id == id);
 
             name = pizza != null ? pizza.PizzaName : "";
 
