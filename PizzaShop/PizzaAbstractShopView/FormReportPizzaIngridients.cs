@@ -53,47 +53,34 @@ namespace PizzaAbstractShopView
 
         private void buttonRefClick(object sender, EventArgs e)
         {
-            if (dateTimePickerFrom.Value.Date > dateTimePickerTo.Value.Date)
+            if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
             {
                 MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             try
             {
-                var dict = logic.GetOrders(new ReportBindingModel
-                {
-                    DateFrom = dateTimePickerFrom.Value.Date,
-                    DateTo = dateTimePickerTo.Value.Date
-                });
-                List<DateTime> dates = new List<DateTime>();
-                foreach (var order in dict)
-                {
-                    if (!dates.Contains(order.DateCreate.Date))
-                    {
-                        dates.Add(order.DateCreate.Date);
-                    }
-                }
+                var dict = logic.GetOrders(new ReportBindingModel { DateFrom = dateTimePickerFrom.Value.Date, DateTo = dateTimePickerTo.Value.Date });
 
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
-                    foreach (var date in dates)
-                    {
-                        decimal GenSum = 0;
-                        dataGridView.Rows.Add(new object[]
-                        {
-                            date.Date.ToShortDateString()
-                        });
 
-                        foreach (var order in dict.Where(rec => rec.DateCreate.Date == date.Date))
+                    foreach (var date in dict)
+                    {
+                        decimal dateSum = 0;
+
+                        dataGridView.Rows.Add(new object[] { date.Key, "", "" });
+
+                        foreach (var order in date)
                         {
                             dataGridView.Rows.Add(new object[] { "", order.PizzaName, order.Sum });
-                            GenSum += order.Sum;
+                            dateSum += order.Sum;
                         }
-                        dataGridView.Rows.Add(new object[]
-                        {
-                            "Итог:", "", GenSum
-                        });
+
+                        dataGridView.Rows.Add(new object[] { "Итого", "", dateSum });
+                        dataGridView.Rows.Add(new object[] { });
                     }
                 }
             }
