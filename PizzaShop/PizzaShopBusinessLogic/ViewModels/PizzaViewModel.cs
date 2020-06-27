@@ -10,7 +10,7 @@ namespace PizzaShopBusinessLogic.ViewModels
     [DataContract]
     public class PizzaViewModel:BaseViewModel
     {
-        [Column(title: "Название закуски", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [Column(title: "Название пиццы", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
         [DisplayName("Название изделия")]
         public string PizzaName { get; set; }
