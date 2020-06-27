@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaShopBusinessLogic.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
@@ -6,21 +7,23 @@ using System.Runtime.Serialization;
 namespace PizzaShopBusinessLogic.ViewModels
 {
     [DataContract]
-    public class ClientViewModel
+    public class ClientViewModel : BaseViewModel
     {
-        [DataMember]
-        public int Id { get; set; }
 
+        [Column(title: "ФИО клиента", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
-        [DisplayName("ФИО")]
         public string FIO { get; set; }
-
+        [Column(title: "Почта", width: 150)]
         [DataMember]
-        [DisplayName("Логин")]
         public string Login { get; set; }
 
         [DataMember]
-        [DisplayName("Пароль")]
         public string Password { get; set; }
+        public override List<string> Properties() => new List<string>
+        {
+            "Id",
+            "FIO",
+            "Login"
+        };
     }
 }
