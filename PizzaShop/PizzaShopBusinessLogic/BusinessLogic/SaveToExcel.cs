@@ -62,28 +62,23 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     CellToName = "C1"
                 });
                 uint rowIndex = 2;
-                List<DateTime> dates = new List<DateTime>();
-                foreach (var order in info.Orders)
+                foreach (var date in info.Orders)
                 {
-                    if (!dates.Contains(order.DateCreate.Date))
-                    {
-                        dates.Add(order.DateCreate.Date);
-                    }
-                }
-                foreach (var date in dates)
-                {
-                    decimal GenSum = 0;
+                    decimal dateSum = 0;
+
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = date.Date.ToShortDateString(),
+                        Text = date.Key.ToString(),
                         StyleIndex = 0U
                     });
+
                     rowIndex++;
-                    foreach (var order in info.Orders.Where(rec => rec.DateCreate.Date == date.Date))
+
+                    foreach (var order in date)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
@@ -94,6 +89,7 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                             Text = order.PizzaName,
                             StyleIndex = 1U
                         });
+
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
                             Worksheet = worksheetPart.Worksheet,
@@ -103,16 +99,19 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                             Text = order.Sum.ToString(),
                             StyleIndex = 1U
                         });
-                        GenSum += order.Sum;
+
+                        dateSum += order.Sum;
+
                         rowIndex++;
                     }
+
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = "Итог:",
+                        Text = "Итого",
                         StyleIndex = 0U
                     });
 
@@ -122,11 +121,13 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                         ShareStringPart = shareStringPart,
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = GenSum.ToString(),
+                        Text = dateSum.ToString(),
                         StyleIndex = 0U
                     });
+
                     rowIndex++;
                 }
+
                 workbookpart.Workbook.Save();
             }
         }
