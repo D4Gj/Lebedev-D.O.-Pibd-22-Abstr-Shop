@@ -21,12 +21,14 @@ namespace PizzaAbstractShopView
         private readonly MainLogic logic;
         private readonly IOrderLogic orderLogic;
         private readonly ReportLogic report;
-        public FormMain(MainLogic logic,IOrderLogic orderLogic,ReportLogic report)
+        private readonly WorkModeling work;
+        public FormMain(MainLogic logic,IOrderLogic orderLogic,WorkModeling work, ReportLogic report)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
             this.report = report;
+            this.work = work;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -43,6 +45,7 @@ namespace PizzaAbstractShopView
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
                     dataGridView.Columns[2].Visible = false;
+                    dataGridView.Columns[3].Visible = false;
                     dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
@@ -159,6 +162,18 @@ namespace PizzaAbstractShopView
         {
             var form = Container.Resolve<FormClients>();
             form.ShowDialog();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            work.DoWork();
+            LoadData();
         }
     }
 }

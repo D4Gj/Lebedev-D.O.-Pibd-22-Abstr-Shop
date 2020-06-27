@@ -7,6 +7,7 @@ using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using PizzaShopBusinessLogic.Enums;
 
 namespace PizzaShopDatabaseImplement.Implements
 {
@@ -34,9 +35,10 @@ namespace PizzaShopDatabaseImplement.Implements
                 }
 
                 element.PizzaId = model.PizzaId == 0 ? element.PizzaId : model.PizzaId;
-                element.ClientId = model.ClientId == null ? element.ClientId : (int)model.ClientId;
+                element.ClientId = model.ClientId.Value;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
+                element.ImplementerId = model.ImplementerId;
                 element.Status = model.Status;
                 element.DateCreate = model.DateCreate;
                 element.DateImplement = model.DateImplement;
@@ -65,26 +67,25 @@ namespace PizzaShopDatabaseImplement.Implements
             using (var context = new PizzaShopDatabase())
             {
                 return context.Orders
-                .Where(
-                    rec => model == null
-                    || rec.Id == model.Id && model.Id.HasValue
-                    || model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
-                    || model.ClientId.HasValue && rec.ClientId == model.ClientId
-                )
-                .Include(rec => rec.Pizza)
-                .Include(rec => rec.Client)
+                .Where(rec => model == null || (rec.Id == model.Id && model.Id.HasValue) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+                (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue) ||
+                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     ClientId = rec.ClientId,
+                    ImplementerId = rec.ImplementerId,
                     PizzaId = rec.PizzaId,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    Status = rec.Status,
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement,
-                    PizzaName = rec.Pizza.PizzaName,
-                    ClientFIO = rec.Client.FIO
+                    Status = rec.Status,
+                    Count = rec.Count,
+                    Sum = rec.Sum,
+                    ClientFIO = rec.Client.FIO,
+                    ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
+                    PizzaName = rec.Pizza.PizzaName
                 })
                 .ToList();
             }
