@@ -42,9 +42,7 @@ namespace PizzaShopClientView
         {
             var json = JsonConvert.SerializeObject(model);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-
             var response = client.PostAsync(requestUrl, data);
-
             var result = response.Result.Content.ReadAsStringAsync().Result;
             if (!response.Result.IsSuccessStatusCode)
             {

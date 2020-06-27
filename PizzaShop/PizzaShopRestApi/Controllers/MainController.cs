@@ -16,32 +16,25 @@ namespace PizzaShopRestApi.Controllers
     public class MainController : ControllerBase
     {
         private readonly IOrderLogic _order;
-        private readonly IPizzaShopLogic _product;
+        private readonly IPizzaShopLogic _pizza;
         private readonly MainLogic _main;
 
         public MainController(IOrderLogic order, IPizzaShopLogic product, MainLogic main)
         {
             _order = order;
-            _product = product;
+            _pizza = product;
             _main = main;
         }
         [HttpGet]
-        public List<PizzaModel> GetProductList() => _product.Read(null)?.Select(rec => Convert(rec)).ToList();
+        public List<PizzaViewModel> GetProductList() => _pizza.Read(null);
         [HttpGet]
-        public PizzaModel GetProduct(int productId) => Convert(_product.Read(new PizzaBindingModel { Id = productId })?[0]);
+        public PizzaViewModel GetProduct(int pizzaId) => _pizza.Read(new PizzaBindingModel
+        {
+            Id = pizzaId
+        })?.FirstOrDefault();
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new OrderBindingModel { ClientId = clientId });
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) => _main.CreateOrder(model);
-        private PizzaModel Convert(PizzaViewModel model)
-        {
-            if (model == null) return null;
-            return new PizzaModel
-            {
-                Id = model.Id,
-                PizzaName = model.PizzaName,
-                Price = model.Price
-            };
-        }
     }
 }

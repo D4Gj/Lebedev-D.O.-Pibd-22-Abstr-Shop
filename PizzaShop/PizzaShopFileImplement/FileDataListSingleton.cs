@@ -19,12 +19,14 @@ namespace PizzaShopFileImplement
         private readonly string PizzaIngredientFileName = "PizzaIngridient.xml";
         private readonly string ClientFileName = "Client.xml";
         private readonly string ImplementerFileName = "Implementer.xml";
+        private readonly string MessageInfoFileName = "MessageInfo.xml";
         public List<Ingridient> Ingridients { get; set; }
         public List<Order> Orders { get; set; }
         public List<Pizza> Pizzas { get; set; }
         public List<PizzaIngredient> PizzaIngridients { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+        public List<MessageInfo> MessageInfos { get; set; }
         private FileDataListSingleton()
         {
             Ingridients = LoadIngredients();
@@ -33,6 +35,7 @@ namespace PizzaShopFileImplement
             PizzaIngridients = LoadPizzaIngredients();
             Clients = LoadClients();
             Implementers = LoadImplementers();
+            MessageInfos = LoadMessageInfos();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -50,6 +53,7 @@ namespace PizzaShopFileImplement
             SavePizzaIngredients();
             SaveClients();
             SaveImplementers();
+            SaveMessageInfos();
         }
         private List<Ingridient> LoadIngredients()
         {
@@ -88,6 +92,31 @@ namespace PizzaShopFileImplement
                     });
                 }
             }
+            return list;
+        }
+        private List<MessageInfo> LoadMessageInfos()
+        {
+            var list = new List<MessageInfo>();
+
+            if (File.Exists(MessageInfoFileName))
+            {
+                XDocument xDocument = XDocument.Load(MessageInfoFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Element("SenderName").Value,
+                        DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value),
+                        Subject = elem.Element("Subject").Value,
+                        Body = elem.Element("Body").Value
+                    });
+                }
+            }
+
             return list;
         }
         private List<Order> LoadOrders()
@@ -281,6 +310,27 @@ namespace PizzaShopFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ImplementerFileName);
+            }
+        }
+        private void SaveMessageInfos()
+        {
+            if (MessageInfos != null)
+            {
+                var xElement = new XElement("MessageInfoes");
+
+                foreach (var messageInfo in MessageInfos)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("Id", messageInfo.MessageId),
+                    new XElement("ClientId", messageInfo.ClientId),
+                    new XElement("SenderName", messageInfo.SenderName),
+                    new XElement("DateDelivery", messageInfo.DateDelivery),
+                    new XElement("Subject", messageInfo.Subject),
+                    new XElement("Body", messageInfo.Body)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(MessageInfoFileName);
             }
         }
     }

@@ -10,7 +10,7 @@ using PizzaShopDatabaseImplement;
 namespace PizzaShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(PizzaShopDatabase))]
-    [Migration("20200518091408_InitialCreate")]
+    [Migration("20200601075111_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,33 @@ namespace PizzaShopDatabaseImplement.Migrations
                     b.HasIndex("IngridientId");
 
                     b.ToTable("Ingridients");
+                });
+
+            modelBuilder.Entity("PizzaShopDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("MessageInfoes");
                 });
 
             modelBuilder.Entity("PizzaShopDatabaseImplement.Models.Order", b =>
@@ -178,6 +205,13 @@ namespace PizzaShopDatabaseImplement.Migrations
                     b.HasOne("PizzaShopDatabaseImplement.Models.Ingridient", null)
                         .WithMany("Ingridients")
                         .HasForeignKey("IngridientId");
+                });
+
+            modelBuilder.Entity("PizzaShopDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("PizzaShopDatabaseImplement.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("PizzaShopDatabaseImplement.Models.Order", b =>

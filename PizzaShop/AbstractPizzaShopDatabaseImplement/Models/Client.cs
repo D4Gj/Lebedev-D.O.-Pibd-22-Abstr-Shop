@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PizzaShopDatabaseImplement.Models
 {
@@ -19,5 +20,7 @@ namespace PizzaShopDatabaseImplement.Models
         public string Password { get; set; }
 
         public List<Order> Orders { get; set; }
+        [ForeignKey("ClientId")]
+        public virtual List<MessageInfo> MessageInfoes { get; set; }
     }
 }
