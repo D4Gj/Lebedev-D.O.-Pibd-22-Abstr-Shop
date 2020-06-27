@@ -5,6 +5,7 @@ using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.Enums;
 using PizzaShopBusinessLogic.Interfaces;
 using PizzaShopBusinessLogic.HelperModels;
+using PizzaShopBusinessLogic.ViewModels;
 
 namespace PizzaShopBusinessLogic.BusinessLogic
 {
@@ -12,12 +13,16 @@ namespace PizzaShopBusinessLogic.BusinessLogic
     {
         private readonly IOrderLogic orderLogic;
         private readonly IClientLogic clientLogic;
+		private readonly IStorageLogic storageLogic;
         private readonly object locker = new object();
-        public MainLogic(IOrderLogic orderLogic,IClientLogic clientLogic)
+        public MainLogic(IOrderLogic orderLogic,IClientLogic clientLogic,IStorageLogic storageLogic)
         {
             this.orderLogic = orderLogic;
             this.clientLogic = clientLogic;
+			this.storageLogic = storageLogic;
         }
+        
+        
         public void CreateOrder(CreateOrderBindingModel model)
         {
             orderLogic.CreateOrUpdate(new OrderBindingModel
@@ -75,6 +80,24 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                     Subject = $"Заказ №{order.Id}",
                     Text = $"Заказ №{order.Id} передан в работу."
                 });
+            }
+            try
+            {
+                storageLogic.RemoveFromStorage(order.PizzaId, order.Count);
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    PizzaId = order.PizzaId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
         public void PayOrder(ChangeStatusBindingModel model)
@@ -136,6 +159,10 @@ namespace PizzaShopBusinessLogic.BusinessLogic
                 Subject = $"Заказ №{order.Id}",
                 Text = $"Заказ №{order.Id} готов."
             });
+        }
+        public void ReplenishStorage(StorageIngridientBindingModel model)
+        {
+            storageLogic.ReplenishStorage(model);
         }
     }
 }

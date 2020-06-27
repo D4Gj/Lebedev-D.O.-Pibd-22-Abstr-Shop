@@ -45,6 +45,8 @@
             this.buttonRef = new System.Windows.Forms.Button();
             this.buttonMessages = new System.Windows.Forms.Button();
             this.создатьБэкапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonReplenish = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -70,7 +72,8 @@
             this.компонентыToolStripMenuItem,
             this.изделияToolStripMenuItem,
             this.клиентыToolStripMenuItem,
-            this.исполнителиToolStripMenuItem});
+            this.исполнителиToolStripMenuItem,
+            this.складыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -79,6 +82,7 @@
             // 
             this.компонентыToolStripMenuItem.Name = "компонентыToolStripMenuItem";
             this.компонентыToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.компонентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.компонентыToolStripMenuItem.Text = "Ингридиенты";
             this.компонентыToolStripMenuItem.Click += new System.EventHandler(this.КомпонентыToolStripMenuItem_Click);
             // 
@@ -154,8 +158,8 @@
             // 
             // buttonCreateOrder
             // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(816, 47);
-            this.buttonCreateOrder.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(813, 92);
+            this.buttonCreateOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(100, 19);
             this.buttonCreateOrder.TabIndex = 2;
@@ -201,6 +205,22 @@
             this.создатьБэкапToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
             this.создатьБэкапToolStripMenuItem.Text = "Создать бэкап";
             this.создатьБэкапToolStripMenuItem.Click += new System.EventHandler(this.создатьБэкапToolStripMenuItem_Click);
+            // складыToolStripMenuItem
+            // 
+            this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
+            this.складыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.складыToolStripMenuItem.Text = "Склады";
+            this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click);
+            // 
+            // buttonReplenish
+            // 
+            this.buttonReplenish.Location = new System.Drawing.Point(813, 341);
+            this.buttonReplenish.Name = "buttonReplenish";
+            this.buttonReplenish.Size = new System.Drawing.Size(116, 23);
+            this.buttonReplenish.TabIndex = 8;
+            this.buttonReplenish.Text = "Пополнить склад";
+            this.buttonReplenish.UseVisualStyleBackColor = true;
+            this.buttonReplenish.Click += new System.EventHandler(this.buttonReplenish_Click_1);
             // 
             // FormMain
             // 
@@ -208,6 +228,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 376);
             this.Controls.Add(this.buttonMessages);
+            this.Controls.Add(this.buttonReplenish);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.buttonPayOrder);
             this.Controls.Add(this.buttonCreateOrder);
@@ -245,5 +266,7 @@
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.Button buttonMessages;
         private System.Windows.Forms.ToolStripMenuItem создатьБэкапToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
+        private System.Windows.Forms.Button buttonReplenish;
     }
 }

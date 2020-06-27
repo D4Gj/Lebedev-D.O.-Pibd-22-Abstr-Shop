@@ -25,10 +25,6 @@ namespace PizzaShopListImplement.Implements
             };
             foreach (var order in source.Orders)
             {
-                if (order.DateCreate == model.DateCreate)
-                {
-                    throw new Exception("Уже есть такой заказ");
-                }
                 if (!model.Id.HasValue && order.Id >= tempOrder.Id)
                 {
                     tempOrder.Id = order.Id + 1;
@@ -38,12 +34,14 @@ namespace PizzaShopListImplement.Implements
                     tempOrder = order;
                 }
             }
+
             if (model.Id.HasValue)
             {
                 if (tempOrder == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
+
                 CreateModel(model, tempOrder);
             }
             else
@@ -104,7 +102,15 @@ namespace PizzaShopListImplement.Implements
 
         private OrderViewModel CreateViewModel(Order order)
         {
-            var pizzaName = source.Pizzas.FirstOrDefault((n) => n.Id == order.PizzaId).PizzaName;
+            string pizzaName = "";
+            for (int j = 0; j < source.Pizzas.Count; ++j)
+            {
+                if (source.Pizzas[j].Id == order.PizzaId)
+                {
+                    pizzaName = source.Pizzas[j].PizzaName;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,

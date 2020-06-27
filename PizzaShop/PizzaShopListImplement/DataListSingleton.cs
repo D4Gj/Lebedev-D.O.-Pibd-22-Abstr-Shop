@@ -14,6 +14,8 @@ namespace PizzaShopListImplement
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
         public List<MessageInfo> MessageInfos{ get; set; }
+        public List<Storage> Storages { get; set; }
+        public List<StorageIngridient> StorageIngridients { get; set; }
         private DataListSingleton()
         {
             Ingridients = new List<Ingridient>();
@@ -23,6 +25,8 @@ namespace PizzaShopListImplement
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
             MessageInfos = new List<MessageInfo>();
+            Storages = new List<Storage>();
+            StorageIngridients = new List<StorageIngridient>();
         }
         public static DataListSingleton GetInstance()
         {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Text;
 
 namespace PizzaShopDatabaseImplement.Models
 {
@@ -13,7 +12,7 @@ namespace PizzaShopDatabaseImplement.Models
         [Required]
         public string IngridientName { get; set; }
         [ForeignKey("IngridientId")]
-        public virtual List<Ingridient> Ingridients { get; set; }
+        public virtual List<PizzaIngridient> PizzaIngridients { get; set; }
         [ForeignKey("IngridientId")]
         public virtual List<StorageIngridient> StorageIngridients { get; set; }
     }

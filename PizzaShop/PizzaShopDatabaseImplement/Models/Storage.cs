@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Text;
 
 namespace PizzaShopDatabaseImplement.Models
 {
-    public class Ingridient
+    public class Storage
     {
         public int Id { get; set; }
         [Required]
-        public string IngridientName { get; set; }
-        [ForeignKey("IngridientId")]
-        public virtual List<Ingridient> Ingridients { get; set; }
-        [ForeignKey("IngridientId")]
+        public string StorageName { get; set; }
+        [ForeignKey("StorageId")]
         public virtual List<StorageIngridient> StorageIngridients { get; set; }
     }
 }

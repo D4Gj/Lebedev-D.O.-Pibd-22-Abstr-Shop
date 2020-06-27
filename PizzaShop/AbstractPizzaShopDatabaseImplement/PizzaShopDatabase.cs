@@ -21,5 +21,7 @@ namespace PizzaShopDatabaseImplement
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Implementer> Implementers { get; set; }
         public virtual DbSet<MessageInfo> MessageInfoes { get; set; }
+        public virtual DbSet<StorageIngridient> StorageIngridients { get; set; }
+        public virtual DbSet<Storage> Storages { get; set; }
     }
 }
