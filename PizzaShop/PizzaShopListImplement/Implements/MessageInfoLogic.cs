@@ -60,7 +60,7 @@ namespace PizzaShopListImplement.Implements
 
             foreach (var client in source.Clients)
             {
-                if (model.ClientId.HasValue && model.ClientId == client.Id)
+                if (client.Login == model.FromMailAddress)
                 {
                     clientId = model.ClientId;
                     break;
