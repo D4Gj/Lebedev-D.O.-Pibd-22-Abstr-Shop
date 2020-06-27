@@ -21,74 +21,39 @@ namespace PizzaShopBusinessLogic.BusinessLogic
             this.ingridientLogic = ingridientLogic;
             this.orderLogic = orderLogic;
         }
-        public List<ReportPizzaIngridientViewModel> GetProductComponent()
-        {
-            var components = ingridientLogic.Read(null);
-            var products = pizzaShopLogic.Read(null);
-            var list = new List<ReportPizzaIngridientViewModel>();
-            foreach (var product in products)
-            {
-                var record = new ReportPizzaIngridientViewModel
-                {
-                    PizzaName = product.PizzaName,
-                    Pizzas = new List<Tuple<string, int>>(),
-                    TotalCount = 0
-                };
-                foreach (var component in components)
-                {
-                    if (product.PizzaIngridients.ContainsKey(component.Id))
-                    {
-                        record.Pizzas.Add(new Tuple<string, int>(component.IngridientName,
-                       product.PizzaIngridients[component.Id].Item2));
-                        record.TotalCount +=
-                       product.PizzaIngridients[component.Id].Item2;
-                    }
-                }
-                list.Add(record);
-            }
-            return list;
-        }
-
         public List<ReportPizzaOrdersViewModel> GetPizzaIngridient()
         {
-            var ingridients = ingridientLogic.Read(null);
             var pizzas = pizzaShopLogic.Read(null);
             var list = new List<ReportPizzaOrdersViewModel>();
-            foreach (var ingridient in ingridients)
+            foreach (var pizza in pizzas)
             {
-                foreach (var pizza in pizzas)
+                foreach (var pizzIngr in pizza.PizzaIngridients)
                 {
-                    if (pizza.PizzaIngridients.ContainsKey(ingridient.Id))
-                    {
                         var record = new ReportPizzaOrdersViewModel
                         {                            
                             PizzaName = pizza.PizzaName,
-                            IngridientName = ingridient.IngridientName,
-                            Count = pizza.PizzaIngridients[ingridient.Id].Item2
+                            IngridientName = pizzIngr.Value.Item1,
+                            Count = pizzIngr.Value.Item2
                         };
                         list.Add(record);
-                    }
                 }
             }
             return list;
         }
 
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
+        public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
         {
-            return orderLogic.Read(new OrderBindingModel
+            var list = orderLogic
+            .Read(new OrderBindingModel
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
             })
-            .Select(x => new ReportOrdersViewModel
-            {
-                DateCreate = x.DateCreate,
-                PizzaName = x.PizzaName,
-                Count = x.Count,
-                Sum = x.Sum,
-                Status = x.Status
-            })
-           .ToList();
+            .GroupBy(rec => rec.DateCreate.Date)
+            .OrderBy(recG => recG.Key)
+            .ToList();
+
+            return list;
         }
 
         public void SaveComponentsToWordFile(ReportBindingModel model)

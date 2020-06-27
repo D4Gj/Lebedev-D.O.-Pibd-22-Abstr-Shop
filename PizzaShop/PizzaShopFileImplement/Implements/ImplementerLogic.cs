@@ -18,11 +18,26 @@ namespace PizzaShopFileImplement.Implements
         }
         public void CreateOrUpdate(ImplementerBindingModel model)
         {
-            Implementer element = source.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            Implementer element = source.Implementers.FirstOrDefault(rec => rec.ImplementerFIO == model.ImplementerFIO && rec.Id != model.Id);
+            if (element != null)
             {
-                int maxId = source.Implementers.Count > 0 ? source.Implementers.Max(rec => rec.Id) : 0;
-                element = new Implementer { Id = maxId + 1 };
+                throw new Exception("Уже есть исполнитель с таким именем");
+            }
+            if (model.Id.HasValue)
+            {
+                element = source.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+                if (model.Id.HasValue)
+                {
+                    if (element == null)
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+
+                }
+            }
+            else
+            {
+                element = new Implementer();
                 source.Implementers.Add(element);
             }
             element.ImplementerFIO = model.ImplementerFIO;
