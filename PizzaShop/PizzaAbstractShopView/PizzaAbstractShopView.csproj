@@ -330,8 +330,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Report1.rdlc" />
-    <EmbeddedResource Include="ReportOrders.rdlc" />
+    <EmbeddedResource Include="ReportStorages.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FormAmountIngridients.datasource" />
     <None Include="Properties\DataSources\FormAmountPizza.datasource" />

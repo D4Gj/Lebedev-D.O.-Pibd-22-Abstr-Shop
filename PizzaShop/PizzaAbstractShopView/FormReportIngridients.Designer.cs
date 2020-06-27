@@ -30,14 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.ReportStorageIngridientViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonToPdf = new System.Windows.Forms.Button();
             this.buttonMake = new System.Windows.Forms.Button();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.StorageIngridientViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ReportStorageIngridientViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.StorageIngridientViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReportStorageIngridientViewModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StorageIngridientViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // ReportStorageIngridientViewModelBindingSource
+            // 
+            this.ReportStorageIngridientViewModelBindingSource.DataSource = typeof(PizzaShopBusinessLogic.ViewModels.ReportStorageIngridientViewModel);
             // 
             // buttonToPdf
             // 
@@ -64,7 +68,7 @@
             reportDataSource1.Name = "DataSetStorage";
             reportDataSource1.Value = this.ReportStorageIngridientViewModelBindingSource;
             this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer.LocalReport.ReportEmbeddedResource = "PizzaAbstractShopView.Report1.rdlc";
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "PizzaAbstractShopView.ReportStorages.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(12, 34);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.ServerReport.BearerToken = null;
@@ -74,10 +78,6 @@
             // StorageIngridientViewModelBindingSource
             // 
             this.StorageIngridientViewModelBindingSource.DataSource = typeof(PizzaShopBusinessLogic.ViewModels.StorageIngridientViewModel);
-            // 
-            // ReportStorageIngridientViewModelBindingSource
-            // 
-            this.ReportStorageIngridientViewModelBindingSource.DataSource = typeof(PizzaShopBusinessLogic.ViewModels.ReportStorageIngridientViewModel);
             // 
             // FormReportIngridients
             // 
@@ -89,9 +89,8 @@
             this.Controls.Add(this.buttonMake);
             this.Name = "FormReportIngridients";
             this.Text = "Отчет по продуктам со складами";
-            this.Load += new System.EventHandler(this.FormReportIngridients_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.StorageIngridientViewModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReportStorageIngridientViewModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StorageIngridientViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

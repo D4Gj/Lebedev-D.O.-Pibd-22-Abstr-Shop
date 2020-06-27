@@ -28,6 +28,7 @@ namespace PizzaAbstractShopView
         {
             try
             {
+                reportViewer.LocalReport.DataSources.Clear();
                 var dataSource = logic.GetStorageIngridients();
                 ReportDataSource source = new ReportDataSource("DataSetStorage", dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
@@ -61,9 +62,6 @@ namespace PizzaAbstractShopView
             }
         }
 
-        private void FormReportIngridients_Load(object sender, EventArgs e)
-        {
 
-        }
     }
 }
