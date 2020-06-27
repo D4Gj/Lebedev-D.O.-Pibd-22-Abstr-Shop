@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.10.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.10.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -96,6 +99,42 @@
     <Reference Include="Microsoft.Identity.Client, Version=3.0.8.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.3.0.8\lib\net45\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -117,6 +156,14 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -145,6 +192,7 @@
     <Reference Include="Unity.Container, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.11.3\lib\net47\Unity.Container.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormAmountPizza.cs">
@@ -152,6 +200,30 @@
     </Compile>
     <Compile Include="FormAmountPizza.Designer.cs">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormIngridient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIngridient.Designer.cs">
+      <DependentUpon>FormIngridient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPizzaIngridient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPizzaIngridient.Designer.cs">
+      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportIngridients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportIngridients.Designer.cs">
+      <DependentUpon>FormReportIngridients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportOrders.Designer.cs">
+      <DependentUpon>FormReportOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAmountIngridients.cs">
       <SubType>Form</SubType>
@@ -171,29 +243,29 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormNameIngridient.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormNameIngridient.Designer.cs">
-      <DependentUpon>FormNameIngridient.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormPizza.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPizza.Designer.cs">
       <DependentUpon>FormPizza.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPizzaIngridient.cs">
+    <Compile Include="FormReportPizzaIngridients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPizzaIngridient.Designer.cs">
-      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
+    <Compile Include="FormReportPizzaIngridients.Designer.cs">
+      <DependentUpon>FormReportPizzaIngridients.cs</DependentUpon>
     </Compile>
     <Compile Include="FormReplenishStorage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormReplenishStorage.Designer.cs">
       <DependentUpon>FormReplenishStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportStoragePizzas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportStoragePizzas.Designer.cs">
+      <DependentUpon>FormReportStoragePizzas.cs</DependentUpon>
     </Compile>
     <Compile Include="FormStorage.cs">
       <SubType>Form</SubType>
@@ -209,8 +281,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="FormAmountPizza.resx">
       <DependentUpon>FormAmountPizza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormIngridient.resx">
+      <DependentUpon>FormIngridient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPizzaIngridient.resx">
+      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportIngridients.resx">
+      <DependentUpon>FormReportIngridients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportOrders.resx">
+      <DependentUpon>FormReportOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAmountIngridients.resx">
       <DependentUpon>FormAmountIngridients.cs</DependentUpon>
@@ -221,14 +306,11 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormNameIngridient.resx">
-      <DependentUpon>FormNameIngridient.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormPizza.resx">
       <DependentUpon>FormPizza.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPizzaIngridient.resx">
-      <DependentUpon>FormPizzaIngridient.cs</DependentUpon>
+    <EmbeddedResource Include="FormReportPizzaIngridients.resx">
+      <DependentUpon>FormReportPizzaIngridients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReplenishStorage.resx">
       <DependentUpon>FormReplenishStorage.cs</DependentUpon>
@@ -248,7 +330,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportStorages.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\FormAmountIngridients.datasource" />
+    <None Include="Properties\DataSources\FormAmountPizza.datasource" />
+    <None Include="Properties\DataSources\FormCreateOrder.datasource" />
+    <None Include="Properties\DataSources\FormMain.datasource" />
+    <None Include="Properties\DataSources\FormNameIngridient.datasource" />
+    <None Include="Properties\DataSources\FormPizza.datasource" />
+    <None Include="Properties\DataSources\FormProductComponent.datasource" />
+    <None Include="Properties\DataSources\PizzaAbstractShopView.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\PizzaAbstractShopView.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.IngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.OrderViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.PizzaIngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.PizzaViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductComponentViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ProductViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportPizzaIngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportPizzaOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.ReportStorageIngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.StorageIngridientViewModel.datasource" />
+    <None Include="Properties\DataSources\PizzaShopBusinessLogic.ViewModels.StorageViewModel.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -279,6 +384,21 @@
       <Project>{c772debe-45c4-44c8-af76-bd65a0fab865}</Project>
       <Name>PizzaShopListImplement</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
