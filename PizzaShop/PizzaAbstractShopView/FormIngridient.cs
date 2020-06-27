@@ -7,26 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
-using PizzaShopBusinessLogic.BindingModels;
 using PizzaShopBusinessLogic.Interfaces;
+using PizzaShopBusinessLogic.BindingModels;
+using Unity;
 
 namespace PizzaAbstractShopView
 {
-
     public partial class FormNameIngridient : Form
     {
+        [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
         private readonly IIngridientLogic logic;
-        private int? id;        
+        private int? id;
+
         public FormNameIngridient(IIngridientLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
         }
-
-        private void FormNameIngridient_Load(object sender, EventArgs e)
+        private void FormComponent_Load(object sender, EventArgs e)
         {
             if (id.HasValue)
             {
@@ -46,13 +46,12 @@ namespace PizzaAbstractShopView
             }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxName.Text))
             {
                 MessageBox.Show("Заполните название", "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
-                return;
+               MessageBoxIcon.Error); return;
             }
             try
             {
@@ -73,10 +72,10 @@ namespace PizzaAbstractShopView
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }     
+        }
     }
 }
