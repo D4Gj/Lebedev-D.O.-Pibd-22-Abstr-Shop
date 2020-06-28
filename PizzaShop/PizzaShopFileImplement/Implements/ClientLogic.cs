@@ -24,7 +24,7 @@ namespace PizzaShopFileImplement.Implements
 
             if (element != null)
             {
-                throw new Exception("Уже есть компонент с таким названием");
+                throw new Exception("Уже есть клиент с таким логином!");
             }
 
             if (model.Id.HasValue)
@@ -68,7 +68,7 @@ namespace PizzaShopFileImplement.Implements
             .Where(
                 rec => model == null
                 || rec.Id == model.Id
-                || rec.Login == model.Login && rec.Password == model.Password
+                || (rec.Login == model.Login && rec.Password == model.Password)
             )
             .Select(rec => new ClientViewModel
             {

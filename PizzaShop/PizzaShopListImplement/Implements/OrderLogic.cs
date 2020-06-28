@@ -73,10 +73,10 @@ namespace PizzaShopListImplement.Implements
             {
                 if (
                     model != null && order.Id == model.Id
-                    || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
-                    || model.ClientId.HasValue && order.ClientId == model.ClientId
-                    || model.FreeOrders.HasValue && model.FreeOrders.Value
-                    || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется
+                    || (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                    || (model.ClientId.HasValue && order.ClientId == model.ClientId)
+                    || (model.FreeOrders.HasValue && model.FreeOrders.Value)
+                    || (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется)
                 )
                 {
                     result.Add(CreateViewModel(order));
